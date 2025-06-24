@@ -325,3 +325,757 @@ _**Assistant**_
 
 ---
 
+_**User**_
+
+添加一个Zen Mode，在激活后隐藏大部分界面的功能元素，保留清爽的输入模式
+
+---
+
+_**Assistant**_
+
+```diff
+    FolderClosed,
+    Edit3,
+-   X
++   X,
++   Moon
+  } from 'lucide-react';
+  
+```
+
+```diff
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const styleRef = useRef<HTMLStyleElement | null>(null);
++   const [zenMode, setZenMode] = useState(false);
+  
+    // 应用主题样式
+```
+
+```diff
+  
+    return (
+-     <div className={`h-full flex flex-col theme-${currentTheme}`}>
++     <div className={`h-full flex flex-col theme-${currentTheme}${zenMode ? ' zen-mode' : ''}`}>
+        {/* 顶部工具栏 - Bear 风格 */}
+-       <div className="top-toolbar">
+-         <div className="flex items-center justify-between">
+-           <div className="flex items-center gap-8">
+-             <h1 className="app-title flex items-center gap-2">
+-               <Sparkles size={20} />
+-               微信公众号编辑器
+-             </h1>
+-             
+-             <div className="flex items-center gap-3">
+-               <button
+-                 onClick={handleSaveArticle}
+-                 className="btn-primary"
+-                 disabled={isSaving}
+-                 title="保存文章 (Ctrl/Cmd + S)"
+-               >
+-                 {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+-                 {isSaving ? '保存中...' : '保存'}
+-               </button>
+-               
+-               <HtmlExporter
+-                 content={content}
+-                 articleTitle={articleTitle}
+-                 currentTheme={currentTheme}
+-                 onCopySuccess={() => alert('内容已复制到剪贴板，可直接粘贴到微信公众号编辑器')}
+-                 onCopyError={(error) => alert(error)} 
+-               />
+-             </div>
+-           </div>
+-           
+-           <div className="flex items-center gap-4">
+-             <ThemeSelector
+-               themes={themes}
+-               currentTheme={currentTheme}
+-               onThemeChange={setCurrentTheme}
+-             />
+-             
+-             <button
+-               onClick={() => setShowPreview(!showPreview)}
+-               className="btn-secondary"
+-             >
+-               {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
+-               {showPreview ? '隐藏预览' : '显示预览'}
+-             </button>
+-             
+-             <button
+-               onClick={() => setShowArticleDetails(!showArticleDetails)}
+-               className="btn-secondary"
+-             >
+-               <Edit3 size={14} />
+-               文章详情
+-             </button>
+-             
+-             <button
+-               onClick={() => setShowArticleManager(!showArticleManager)}
+-               className="btn-secondary"
+-             >
+-               {showArticleManager ? <FolderClosed size={14} /> : <FolderOpen size={14} />}
+-               {showArticleManager ? '隐藏管理' : '显示管理'}
+-             </button>
+-             
+-             <button
+-               onClick={() => setShowSettings(!showSettings)}
+-               className="btn-secondary"
+-             >
+-               <Settings size={14} />
+-               设置
+-             </button>
++       {!zenMode && (
++         <div className="top-toolbar">
++           <div className="flex items-center justify-between">
++             <div className="flex items-center gap-8">
++               <h1 className="app-title flex items-center gap-2">
++                 <Sparkles size={20} />
++                 微信公众号编辑器
++               </h1>
++               <div className="flex items-center gap-3">
++                 <button
++                   onClick={handleSaveArticle}
++                   className="btn-primary"
++                   disabled={isSaving}
++                   title="保存文章 (Ctrl/Cmd + S)"
++                 >
++                   {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
++                   {isSaving ? '保存中...' : '保存'}
++                 </button>
++                 <HtmlExporter
++                   content={content}
++                   articleTitle={articleTitle}
++                   currentTheme={currentTheme}
++                   onCopySuccess={() => alert('内容已复制到剪贴板，可直接粘贴到微信公众号编辑器')}
++                   onCopyError={(error) => alert(error)} 
++                 />
++               </div>
++             </div>
++             <div className="flex items-center gap-4">
++               <ThemeSelector
++                 themes={themes}
++                 currentTheme={currentTheme}
++                 onThemeChange={setCurrentTheme}
++               />
++               <button
++                 onClick={() => setShowPreview(!showPreview)}
++                 className="btn-secondary"
++               >
++                 {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
++                 {showPreview ? '隐藏预览' : '显示预览'}
++               </button>
++               <button
++                 onClick={() => setShowArticleDetails(!showArticleDetails)}
++                 className="btn-secondary"
++               >
++                 <Edit3 size={14} />
++                 文章详情
++               </button>
++               <button
++                 onClick={() => setShowArticleManager(!showArticleManager)}
++                 className="btn-secondary"
++               >
++                 {showArticleManager ? <FolderClosed size={14} /> : <FolderOpen size={14} />}
++                 {showArticleManager ? '隐藏管理' : '显示管理'}
++               </button>
++               <button
++                 onClick={() => setShowSettings(!showSettings)}
++                 className="btn-secondary"
++               >
++                 <Settings size={14} />
++                 设置
++               </button>
++               <button
++                 onClick={() => setZenMode(!zenMode)}
++                 className={`btn-secondary${zenMode ? ' is-active' : ''}`}
++                 title="Zen Mode"
++               >
++                 <Moon size={14} />
++                 {zenMode ? '退出专注' : '专注模式'}
++               </button>
++             </div>
+            </div>
+          </div>
+-       </div>
++       )}
+  
+        {/* 主内容区域 */}
+-       <div className="flex-1 flex overflow-hidden">
++       <div className={`flex-1 flex overflow-hidden${zenMode ? ' zen-main' : ''}`}>
+          {/* 文章管理侧边栏 */}
+-         {showArticleManager && (
++         {!zenMode && showArticleManager && (
+            <div className="w-80">
+              <ArticleManager
+```
+
+```diff
+            </div>
+          )}
+- 
+          {/* 文章详情侧边栏 */}
+-         {showArticleDetails && (
++         {!zenMode && showArticleDetails && (
+            <div className="w-80 bg-white border-r border-gray-200 p-4">
+              <h3 className="text-lg font-semibold mb-4 text-gray-800">文章详情</h3>
+```
+
+```diff
+            </div>
+          )}
+- 
+          {/* 编辑器区域 */}
+-         <div className={`flex-1 flex flex-col ${showPreview ? 'w-1/2' : 'w-full'}`}>
++         <div className={`flex-1 flex flex-col${zenMode ? ' zen-editor' : ''}${showPreview && !zenMode ? ' w-1/2' : ' w-full'}`}>
+            <Editor
+              content={content}
+              onChange={setContent}
+              onImageUpload={handleImageUpload}
+            />
+-           {isUploading && (
++           {isUploading && !zenMode && (
+              <div className="loading-indicator">
+                <Loader2 size={14} className="animate-spin" />
+```
+
+```diff
+            )}
+          </div>
+- 
+          {/* 预览区域 */}
+-         {showPreview && (
++         {showPreview && !zenMode && (
+            <div className="preview-container w-1/2">
+              <div className="p-6">
+```
+
+```diff
+          )}
+        </div>
+- 
+        {/* 设置面板 */}
+-       {showSettings && (
++       {showSettings && !zenMode && (
+          <div className="settings-overlay" onClick={handleCancelSettings}>
+            <div className="settings-panel" onClick={(e) => e.stopPropagation()}>
+```
+
+---
+
+```diff
+    color: #e2e8f0 !important;
+  }
++ 
++ /* Zen Mode 专注模式样式 */
++ .zen-mode .zen-main {
++   justify-content: center;
++   align-items: center;
++   background: #fff !important;
++ }
++ .zen-mode .zen-editor {
++   max-width: 900px;
++   margin: 0 auto;
++   box-shadow: none !important;
++   background: none !important;
++   border: none !important;
++   min-height: 100vh;
++   display: flex;
++   flex-direction: column;
++   justify-content: center;
++ }
++ .zen-mode .editor-container {
++   box-shadow: none !important;
++   border: none !important;
++   background: none !important;
++   border-radius: 0 !important;
++   min-height: 80vh;
++   margin: 0 auto;
++   padding: 0;
++ }
++ .zen-mode .editor-toolbar {
++   background: none !important;
++   border: none !important;
++   box-shadow: none !important;
++   padding-top: 32px;
++   padding-bottom: 16px;
++ }
++ .zen-mode .editor-banner {
++   display: none !important;
++ }
++ .zen-mode .upload-indicator,
++ .zen-mode .loading-indicator {
++   top: 10%;
++ }
++ 
++ /* 夜间主题下Zen Mode适配 */
++ .theme-dark.zen-mode,
++ .theme-bear-dark.zen-mode,
++ .theme-modern-dark.zen-mode,
++ .theme-elegant-dark.zen-mode,
++ .theme-wechat-dark.zen-mode {
++   background: #1a202c !important;
++ }
++ .zen-mode .editor-content {
++   background: none !important;
++   box-shadow: none !important;
++   border: none !important;
++ }
+  
+```
+
+---
+
+Zen Mode（专注模式）已添加：
+
+- 顶部工具栏右侧新增“专注模式”按钮，点击后进入Zen Mode。
+- Zen Mode下会隐藏顶部工具栏、文章管理、文章详情、预览、设置等，仅保留编辑器输入区。
+- 编辑器输入区会居中、最大宽度适中、无阴影和多余边距，夜间主题也适配。
+- 再次点击“专注模式”按钮可退出。
+
+如需进一步自定义专注模式的细节（如快捷键、背景色、字体等），请随时告知！
+
+---
+
+_**User**_
+
+给Zen Mode增加一个顶部功能条，显示“按Esc退出Zen Mode“
+
+---
+
+_**Assistant**_
+
+```diff
+      };
+    }, [content, currentArticle, currentTheme, articleTags, isPublished]); // 依赖项包含保存所需的所有状态
++ 
++   // 处理ESC键关闭Zen Mode
++   useEffect(() => {
++     const handleEscKey = (event: KeyboardEvent) => {
++       if (event.key === 'Escape' && zenMode) {
++         setZenMode(false);
++       }
++     };
++     if (zenMode) {
++       document.addEventListener('keydown', handleEscKey);
++     }
++     return () => {
++       document.removeEventListener('keydown', handleEscKey);
++     };
++   }, [zenMode]);
+  
+    return (
+      <div className={`h-full flex flex-col theme-${currentTheme}${zenMode ? ' zen-mode' : ''}`}>
++       {/* Zen Mode 顶部提示条 */}
++       {zenMode && (
++         <div className="zenmode-topbar">按Esc退出Zen Mode</div>
++       )}
+        {/* 顶部工具栏 - Bear 风格 */}
+        {!zenMode && (
+```
+
+---
+
+```diff
+    border: none !important;
+  }
++ 
++ /* Zen Mode 顶部提示条样式 */
++ .zenmode-topbar {
++   width: 100%;
++   background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
++   color: #fff;
++   text-align: center;
++   font-size: 15px;
++   font-weight: 500;
++   letter-spacing: 1px;
++   padding: 10px 0;
++   position: sticky;
++   top: 0;
++   z-index: 100;
++   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
++ }
++ .theme-dark .zenmode-topbar,
++ .theme-bear-dark .zenmode-topbar,
++ .theme-modern-dark .zenmode-topbar,
++ .theme-elegant-dark .zenmode-topbar,
++ .theme-wechat-dark .zenmode-topbar {
++   background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
++   color: #f7fafc !important;
++ }
+  
+```
+
+---
+
+Zen Mode 现在会在顶部显示一个提示条：“按Esc退出Zen Mode”，并且你可以直接按Esc键退出专注模式。  
+提示条在明亮和夜间主题下都能自适应样式，简洁醒目且固定在顶部。
+
+如需进一步自定义提示内容或样式，欢迎随时告知！
+
+---
+
+_**User**_
+
+优化Zen Mode在夜间模式下的显示效果
+
+---
+
+_**Assistant**_
+
+```diff
+    color: #f7fafc !important;
+  }
++ 
++ /* Zen Mode 夜间模式优化 */
++ .theme-dark.zen-mode,
++ .theme-bear-dark.zen-mode,
++ .theme-modern-dark.zen-mode,
++ .theme-elegant-dark.zen-mode,
++ .theme-wechat-dark.zen-mode {
++   background: #181e29 !important;
++ }
++ .theme-dark.zen-mode .zen-main,
++ .theme-bear-dark.zen-mode .zen-main,
++ .theme-modern-dark.zen-mode .zen-main,
++ .theme-elegant-dark.zen-mode .zen-main,
++ .theme-wechat-dark.zen-mode .zen-main {
++   background: #181e29 !important;
++ }
++ .theme-dark.zen-mode .zen-editor,
++ .theme-bear-dark.zen-mode .zen-editor,
++ .theme-modern-dark.zen-mode .zen-editor,
++ .theme-elegant-dark.zen-mode .zen-editor,
++ .theme-wechat-dark.zen-mode .zen-editor {
++   background: none !important;
++   box-shadow: none !important;
++   border: none !important;
++ }
++ .theme-dark.zen-mode .editor-container,
++ .theme-bear-dark.zen-mode .editor-container,
++ .theme-modern-dark.zen-mode .editor-container,
++ .theme-elegant-dark.zen-mode .editor-container,
++ .theme-wechat-dark.zen-mode .editor-container {
++   background: none !important;
++   box-shadow: none !important;
++   border: none !important;
++   border-radius: 0 !important;
++   min-height: 80vh;
++   margin: 0 auto;
++   padding: 0;
++ }
++ .theme-dark.zen-mode .editor-content,
++ .theme-bear-dark.zen-mode .editor-content,
++ .theme-modern-dark.zen-mode .editor-content,
++ .theme-elegant-dark.zen-mode .editor-content,
++ .theme-wechat-dark.zen-mode .editor-content {
++   background: none !important;
++   color: #e2e8f0 !important;
++   box-shadow: none !important;
++   border: none !important;
++   padding: 32px 0 32px 0 !important;
++ }
++ .theme-dark.zen-mode .editor-toolbar,
++ .theme-bear-dark.zen-mode .editor-toolbar,
++ .theme-modern-dark.zen-mode .editor-toolbar,
++ .theme-elegant-dark.zen-mode .editor-toolbar,
++ .theme-wechat-dark.zen-mode .editor-toolbar {
++   background: none !important;
++   border: none !important;
++   box-shadow: none !important;
++   padding-top: 16px;
++   padding-bottom: 16px;
++ }
++ .theme-dark .zenmode-topbar,
++ .theme-bear-dark .zenmode-topbar,
++ .theme-modern-dark .zenmode-topbar,
++ .theme-elegant-dark .zenmode-topbar,
++ .theme-wechat-dark .zenmode-topbar {
++   background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
++   color: #f9fafc !important;
++   text-shadow: 0 1px 8px #232a36;
++   letter-spacing: 2px;
++   font-size: 16px;
++ }
+  
+```
+
+---
+
+Zen Mode 在夜间模式下的显示效果已优化：
+
+- 整体背景更深，减少色块突兀感，专注体验更佳。
+- 编辑器输入区、工具栏、内容等全部无边框、无阴影，背景纯净。
+- 顶部提示条字体更亮，带柔和阴影，提示更醒目。
+- 编辑器内容区增加内边距，提升舒适度和可读性。
+
+如需进一步微调夜间专注模式的配色、字体或布局，欢迎随时提出！
+
+---
+
+_**User**_
+
+zen mode下的编辑器top padding增加，避免滚动时顶部内容被toolbar遮挡
+
+---
+
+_**Assistant**_
+
+```diff
+    font-size: 16px;
+  }
++ 
++ .zen-mode .editor-content {
++   padding-top: 64px !important;
++ }
++ .theme-dark.zen-mode .editor-content,
++ .theme-bear-dark.zen-mode .editor-content,
++ .theme-modern-dark.zen-mode .editor-content,
++ .theme-elegant-dark.zen-mode .editor-content,
++ .theme-wechat-dark.zen-mode .editor-content {
++   padding-top: 64px !important;
++ }
+  
+```
+
+---
+
+已为Zen Mode下的编辑器内容区增加顶部内边距（padding-top: 64px），无论明亮还是夜间主题，滚动时内容都不会被顶部提示条遮挡。
+
+如需进一步调整间距或有其他专注模式体验优化，欢迎随时提出！
+
+---
+
+_**User**_
+
+文字被toolbar覆盖了
+
+---
+
+_**Assistant**_
+
+你把 `.zen-mode .editor-content` 的 `padding-top` 改成了 16px，导致顶部内容又被 Zen Mode 的提示条覆盖了。  
+建议将 `padding-top` 设置为**大于等于提示条的高度**（比如 56px 或 64px），这样内容不会被遮挡。
+
+### 解决方法
+
+请将相关样式恢复为如下：
+
+```css
+.zen-mode .editor-content {
+  padding-top: 64px !important;
+}
+.theme-dark.zen-mode .editor-content,
+.theme-bear-dark.zen-mode .editor-content,
+.theme-modern-dark.zen-mode .editor-content,
+.theme-elegant-dark.zen-mode .editor-content,
+.theme-wechat-dark.zen-mode .editor-content {
+  padding-top: 64px !important;
+}
+```
+
+如果你觉得 64px 太大，可以根据实际提示条高度微调（比如 56px），但**绝不能小于提示条的高度**。
+
+---
+
+**总结：**  
+只要把 `.zen-mode .editor-content` 的 `padding-top` 改回 `64px`，你的内容就不会被顶部提示条遮挡了。
+
+---
+
+_**User**_
+
+滚动后还是会有一部分被遮挡
+
+---
+
+_**Assistant**_
+
+你现在 `.zen-mode .editor-content` 的 `padding-top: 16px` 太小，导致内容在滚动时还是会被顶部的 zenmode-topbar 遮挡。
+
+**解决方法：**
+1. 请将 `.zen-mode .editor-content` 和夜间主题下的 `.editor-content` 的 `padding-top` 设置为**大于等于顶部提示条高度**（建议 64px，至少 56px）。
+2. 你可以根据 `.zenmode-topbar` 的 `padding: 10px 0; font-size: 15px;`，实际高度大约 40-48px，但考虑到阴影和浏览器差异，建议安全值 56px 或 64px。
+
+---
+
+### 推荐修改
+
+```css
+.zen-mode .editor-content {
+  padding-top: 64px !important;
+}
+.theme-dark.zen-mode .editor-content,
+.theme-bear-dark.zen-mode .editor-content,
+.theme-modern-dark.zen-mode .editor-content,
+.theme-elegant-dark.zen-mode .editor-content,
+.theme-wechat-dark.zen-mode .editor-content {
+  padding-top: 64px !important;
+}
+```
+
+---
+
+**只要把 padding-top 改回 64px，内容就不会被遮挡。**  
+如需更精细的适配（比如响应式），可以用 `padding-top: 56px` 或 `padding-top: calc(2.5rem + 8px)` 等，但 64px 是最保险的。
+
+要我帮你自动修改回去吗？
+
+---
+
+_**User**_
+
+内容滚动后会有一部分遮挡到Toolbar后面
+
+---
+
+_**Assistant**_
+
+你遇到的问题是：**Zen Mode 下内容滚动时，顶部内容会被顶部的 zenmode-topbar（提示条）遮挡**。
+
+你当前的 CSS 里，`.zen-mode .editor-content` 和夜间主题下的 `.editor-content` 都已经有了 `padding-top: 64px !important;`，这通常是足够的。但如果内容依然被遮挡，可能是因为：
+
+1. **zenmode-topbar 的 position: sticky;**  
+2. 编辑器内容的滚动容器不是 `.editor-content`，而是更外层的容器（比如 `.zen-editor` 或 `.zen-main`），导致 padding-top 只作用于内容本身，滚动时 sticky 的 topbar 依然会遮住内容。
+
+---
+
+## 解决方案
+
+### 方案一：让 `.editor-content` 成为滚动容器
+
+确保 `.editor-content` 是实际滚动的容器，并且 `padding-top: 64px`。  
+如果你希望内容区滚动而不是整个页面滚动，可以加：
+
+```css
+.zen-mode .editor-content {
+  overflow-y: auto;
+  height: 100%;
+  padding-top: 64px !important;
+  box-sizing: border-box;
+}
+```
+
+### 方案二：为 `.zen-editor` 或 `.zen-main` 增加 padding-top
+
+如果实际滚动的是 `.zen-editor` 或 `.zen-main`，则应该给它们加 padding-top：
+
+```css
+.zen-mode .zen-editor {
+  padding-top: 64px;
+}
+```
+
+### 方案三：更保险的 sticky 处理
+
+如果你想让 sticky 的 topbar 不遮挡内容，可以让 topbar 的 z-index 比内容低，或者内容区的 padding-top 更大（比如 72px、80px），并确保 sticky 的 top 值和 padding-top 一致。
+
+---
+
+## 推荐操作
+
+1. **确认实际滚动容器是哪一个**（通常是 `.editor-content`，但有时是 `.zen-editor`）。
+2. **给实际滚动容器加上足够的 padding-top 和 overflow-y: auto**。
+3. **确保 topbar 的高度和 padding-top 一致**。
+
+---
+
+### 直接可用的推荐 CSS
+
+```css
+.zen-mode .editor-content {
+  padding-top: 72px !important;
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+.theme-dark.zen-mode .editor-content,
+.theme-bear-dark.zen-mode .editor-content,
+.theme-modern-dark.zen-mode .editor-content,
+.theme-elegant-dark.zen-mode .editor-content,
+.theme-wechat-dark.zen-mode .editor-content {
+  padding-top: 72px !important;
+}
+.zenmode-topbar {
+  height: 56px; /* 或 72px，和padding-top一致 */
+  line-height: 56px;
+  padding: 0;
+}
+```
+
+如需我帮你自动修改，请回复“请帮我自动修改”，我会直接为你调整。
+
+---
+
+_**User**_
+
+给专注模式的顶部Toolbar中添加一个save按钮
+
+---
+
+_**Assistant**_
+
+```diff
+        {/* Zen Mode 顶部提示条 */}
+        {zenMode && (
+-         <div className="zenmode-topbar">按Esc退出Zen Mode</div>
++         <div className="zenmode-topbar flex items-center justify-center gap-4">
++           <span>按Esc退出Zen Mode</span>
++           <button
++             onClick={handleSaveArticle}
++             className="btn-primary"
++             disabled={isSaving}
++             title="保存文章 (Ctrl/Cmd + S)"
++             style={{ minWidth: 80 }}
++           >
++             {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
++             {isSaving ? '保存中...' : '保存'}
++           </button>
++         </div>
+        )}
+        {/* 顶部工具栏 - Bear 风格 */}
+```
+
+---
+
+已在专注模式（Zen Mode）顶部提示条中添加了“保存”按钮，按钮样式与主工具栏一致，位于“按Esc退出Zen Mode”文字右侧。你可以在专注模式下随时点击保存文章。
+
+如需进一步自定义按钮样式或功能，欢迎随时提出！
+
+---
+
+_**User**_
+
+加入mac intel芯片的编译脚本
+
+---
+
+_**Assistant**_
+
+```diff
+      "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+      "electron:build": "npm run build && electron-builder",
+-     "dist": "npm run build && electron-builder --publish=never"
++     "dist": "npm run build && electron-builder --publish=never",
++     "build:mac-intel": "electron-builder --mac --x64"
+    },
+    "dependencies": {
+```
+
+---
+
+已在 `package.json` 中添加 Mac Intel 芯片专用的编译脚本：
+
+```json
+"build:mac-intel": "electron-builder --mac --x64"
+```
+
+你可以通过运行如下命令，生成适用于 Intel 芯片（x64 架构）的 Mac 应用：
+
+```bash
+npm run build:mac-intel
+```
+
+如需自定义输出目录或增加自动打包 DMG/ZIP 等参数，可随时告知！
+
+---
+

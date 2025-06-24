@@ -2933,3 +2933,164 @@ body {
   background: rgba(45, 55, 72, 0.8) !important;
   color: #e2e8f0 !important;
 }
+
+/* Zen Mode 专注模式样式 */
+.zen-mode .zen-main {
+  justify-content: center;
+  align-items: center;
+  background: #fff !important;
+}
+.zen-mode .zen-editor {
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.zen-mode .editor-container {
+  box-shadow: none !important;
+  border: none !important;
+  background: none !important;
+  border-radius: 0 !important;
+  min-height: 80vh;
+  margin: 0 auto;
+  padding: 0;
+}
+.zen-mode .editor-toolbar {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.zen-mode .editor-banner {
+  display: none !important;
+}
+.zen-mode .upload-indicator,
+.zen-mode .loading-indicator {
+  top: 10%;
+}
+
+/* 夜间主题下Zen Mode适配 */
+.theme-dark.zen-mode,
+.theme-bear-dark.zen-mode,
+.theme-modern-dark.zen-mode,
+.theme-elegant-dark.zen-mode,
+.theme-wechat-dark.zen-mode {
+  background: #1a202c !important;
+}
+.zen-mode .editor-content {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Zen Mode 顶部提示条样式 */
+.zenmode-topbar {
+  width: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+}
+.theme-dark .zenmode-topbar,
+.theme-bear-dark .zenmode-topbar,
+.theme-modern-dark .zenmode-topbar,
+.theme-elegant-dark .zenmode-topbar,
+.theme-wechat-dark .zenmode-topbar {
+  background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
+  color: #f7fafc !important;
+}
+
+/* Zen Mode 夜间模式优化 */
+.theme-dark.zen-mode,
+.theme-bear-dark.zen-mode,
+.theme-modern-dark.zen-mode,
+.theme-elegant-dark.zen-mode,
+.theme-wechat-dark.zen-mode {
+  background: #181e29 !important;
+}
+.theme-dark.zen-mode .zen-main,
+.theme-bear-dark.zen-mode .zen-main,
+.theme-modern-dark.zen-mode .zen-main,
+.theme-elegant-dark.zen-mode .zen-main,
+.theme-wechat-dark.zen-mode .zen-main {
+  background: #181e29 !important;
+}
+.theme-dark.zen-mode .zen-editor,
+.theme-bear-dark.zen-mode .zen-editor,
+.theme-modern-dark.zen-mode .zen-editor,
+.theme-elegant-dark.zen-mode .zen-editor,
+.theme-wechat-dark.zen-mode .zen-editor {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.theme-dark.zen-mode .editor-container,
+.theme-bear-dark.zen-mode .editor-container,
+.theme-modern-dark.zen-mode .editor-container,
+.theme-elegant-dark.zen-mode .editor-container,
+.theme-wechat-dark.zen-mode .editor-container {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 0;
+}
+.theme-dark.zen-mode .editor-content,
+.theme-bear-dark.zen-mode .editor-content,
+.theme-modern-dark.zen-mode .editor-content,
+.theme-elegant-dark.zen-mode .editor-content,
+.theme-wechat-dark.zen-mode .editor-content {
+  background: none !important;
+  color: #e2e8f0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 16px 0 16px 0 !important;
+}
+.theme-dark.zen-mode .editor-toolbar,
+.theme-bear-dark.zen-mode .editor-toolbar,
+.theme-modern-dark.zen-mode .editor-toolbar,
+.theme-elegant-dark.zen-mode .editor-toolbar,
+.theme-wechat-dark.zen-mode .editor-toolbar {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.theme-dark .zenmode-topbar,
+.theme-bear-dark .zenmode-topbar,
+.theme-modern-dark .zenmode-topbar,
+.theme-elegant-dark .zenmode-topbar,
+.theme-wechat-dark .zenmode-topbar {
+  background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
+  color: #f9fafc !important;
+  text-shadow: 0 1px 8px #232a36;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.zen-mode .editor-content {
+  margin-top: 32px !important;
+}
+.theme-dark.zen-mode .editor-content,
+.theme-bear-dark.zen-mode .editor-content,
+.theme-modern-dark.zen-mode .editor-content,
+.theme-elegant-dark.zen-mode .editor-content,
+.theme-wechat-dark.zen-mode .editor-content {
+  padding-top: 16px !important;
+}

@@ -19,7 +19,8 @@ import {
   FolderOpen,
   FolderClosed,
   Edit3,
-  X
+  X,
+  Moon
 } from 'lucide-react';
 
 declare global {
@@ -152,6 +153,7 @@ function App() {
   const [isSaving, setIsSaving] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const styleRef = useRef<HTMLStyleElement | null>(null);
+  const [zenMode, setZenMode] = useState(false);
 
   // 应用主题样式
   useEffect(() => {
@@ -437,84 +439,119 @@ function App() {
     };
   }, [content, currentArticle, currentTheme, articleTags, isPublished]); // 依赖项包含保存所需的所有状态
 
+  // 处理ESC键关闭Zen Mode
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && zenMode) {
+        setZenMode(false);
+      }
+    };
+    if (zenMode) {
+      document.addEventListener('keydown', handleEscKey);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [zenMode]);
+
   return (
-    <div className={`h-full flex flex-col theme-${currentTheme}`}>
+    <div className={`h-full flex flex-col theme-${currentTheme}${zenMode ? ' zen-mode' : ''}`}>
+      {/* Zen Mode 顶部提示条 */}
+      {zenMode && (
+        <div className="zenmode-topbar flex items-center justify-center gap-4">
+          <span>按Esc退出Zen Mode</span>
+          <button
+            onClick={handleSaveArticle}
+            className="btn-primary"
+            disabled={isSaving}
+            title="保存文章 (Ctrl/Cmd + S)"
+            style={{ minWidth: 80 }}
+          >
+            {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+            {isSaving ? '保存中...' : '保存'}
+          </button>
+        </div>
+      )}
       {/* 顶部工具栏 - Bear 风格 */}
-      <div className="top-toolbar">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <h1 className="app-title flex items-center gap-2">
-              <Sparkles size={20} />
-              微信公众号编辑器
-            </h1>
-            
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleSaveArticle}
-                className="btn-primary"
-                disabled={isSaving}
-                title="保存文章 (Ctrl/Cmd + S)"
-              >
-                {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-                {isSaving ? '保存中...' : '保存'}
-              </button>
-              
-              <HtmlExporter
-                content={content}
-                articleTitle={articleTitle}
+      {!zenMode && (
+        <div className="top-toolbar">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <h1 className="app-title flex items-center gap-2">
+                <Sparkles size={20} />
+                微信公众号编辑器
+              </h1>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleSaveArticle}
+                  className="btn-primary"
+                  disabled={isSaving}
+                  title="保存文章 (Ctrl/Cmd + S)"
+                >
+                  {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                  {isSaving ? '保存中...' : '保存'}
+                </button>
+                <HtmlExporter
+                  content={content}
+                  articleTitle={articleTitle}
+                  currentTheme={currentTheme}
+                  onCopySuccess={() => alert('内容已复制到剪贴板，可直接粘贴到微信公众号编辑器')}
+                  onCopyError={(error) => alert(error)} 
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <ThemeSelector
+                themes={themes}
                 currentTheme={currentTheme}
-                onCopySuccess={() => alert('内容已复制到剪贴板，可直接粘贴到微信公众号编辑器')}
-                onCopyError={(error) => alert(error)} 
+                onThemeChange={setCurrentTheme}
               />
+              <button
+                onClick={() => setShowPreview(!showPreview)}
+                className="btn-secondary"
+              >
+                {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
+                {showPreview ? '隐藏预览' : '显示预览'}
+              </button>
+              <button
+                onClick={() => setShowArticleDetails(!showArticleDetails)}
+                className="btn-secondary"
+              >
+                <Edit3 size={14} />
+                文章详情
+              </button>
+              <button
+                onClick={() => setShowArticleManager(!showArticleManager)}
+                className="btn-secondary"
+              >
+                {showArticleManager ? <FolderClosed size={14} /> : <FolderOpen size={14} />}
+                {showArticleManager ? '隐藏管理' : '显示管理'}
+              </button>
+              <button
+                onClick={() => setZenMode(!zenMode)}
+                className={`btn-secondary${zenMode ? ' is-active' : ''}`}
+                title="Zen Mode"
+              >
+                <Moon size={14} />
+                {zenMode ? '退出专注' : '专注模式'}
+              </button>
+              <button
+                onClick={() => setShowSettings(!showSettings)}
+                className="btn-secondary"
+              >
+                <Settings size={14} />
+                设置
+              </button>
+
             </div>
           </div>
-          
-          <div className="flex items-center gap-4">
-            <ThemeSelector
-              themes={themes}
-              currentTheme={currentTheme}
-              onThemeChange={setCurrentTheme}
-            />
-            
-            <button
-              onClick={() => setShowPreview(!showPreview)}
-              className="btn-secondary"
-            >
-              {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
-              {showPreview ? '隐藏预览' : '显示预览'}
-            </button>
-            
-            <button
-              onClick={() => setShowArticleDetails(!showArticleDetails)}
-              className="btn-secondary"
-            >
-              <Edit3 size={14} />
-              文章详情
-            </button>
-            
-            <button
-              onClick={() => setShowArticleManager(!showArticleManager)}
-              className="btn-secondary"
-            >
-              {showArticleManager ? <FolderClosed size={14} /> : <FolderOpen size={14} />}
-              {showArticleManager ? '隐藏管理' : '显示管理'}
-            </button>
-            
-            <button
-              onClick={() => setShowSettings(!showSettings)}
-              className="btn-secondary"
-            >
-              <Settings size={14} />
-              设置
-            </button>
-          </div>
         </div>
-      </div>
+      )}
 
       {/* 主内容区域 */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className={`flex-1 flex overflow-hidden${zenMode ? ' zen-main' : ''}`}>
         {/* 文章管理侧边栏 */}
-        {showArticleManager && (
+        {!zenMode && showArticleManager && (
           <div className="w-80">
             <ArticleManager
               onSelectArticle={handleSelectArticle}
@@ -524,9 +561,8 @@ function App() {
             />
           </div>
         )}
-
         {/* 文章详情侧边栏 */}
-        {showArticleDetails && (
+        {!zenMode && showArticleDetails && (
           <div className="w-80 bg-white border-r border-gray-200 p-4">
             <h3 className="text-lg font-semibold mb-4 text-gray-800">文章详情</h3>
             
@@ -610,24 +646,22 @@ function App() {
             </div>
           </div>
         )}
-
         {/* 编辑器区域 */}
-        <div className={`flex-1 flex flex-col ${showPreview ? 'w-1/2' : 'w-full'}`}>
+        <div className={`flex-1 flex flex-col${zenMode ? ' zen-editor' : ''}${showPreview && !zenMode ? ' w-1/2' : ' w-full'}`}>
           <Editor
             content={content}
             onChange={setContent}
             onImageUpload={handleImageUpload}
           />
-          {isUploading && (
+          {isUploading && !zenMode && (
             <div className="loading-indicator">
               <Loader2 size={14} className="animate-spin" />
               正在上传图片...
             </div>
           )}
         </div>
-
         {/* 预览区域 */}
-        {showPreview && (
+        {showPreview && !zenMode && (
           <div className="preview-container w-1/2">
             <div className="p-6">
               <h2 className="text-lg font-semibold mb-4 text-gray-800">预览效果</h2>
@@ -639,9 +673,8 @@ function App() {
           </div>
         )}
       </div>
-
       {/* 设置面板 */}
-      {showSettings && (
+      {showSettings && !zenMode && (
         <div className="settings-overlay" onClick={handleCancelSettings}>
           <div className="settings-panel" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
