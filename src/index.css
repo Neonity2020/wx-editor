@@ -138,17 +138,17 @@ body {
 /* 左侧按钮组样式优化 */
 .top-toolbar .flex.items-center.gap-3 {
   gap: 12px !important;
-  padding-right: 16px;
-  border-right: 1px solid rgba(203, 213, 225, 0.2);
-  margin-right: 8px;
+  /* padding-right: 16px; */
+  /* border-right: 1px solid rgba(203, 213, 225, 0.2); */
+  /* margin-right: 8px; */
 }
 
 /* 右侧按钮组样式优化 */
 .top-toolbar .flex.items-center.gap-4 {
   gap: 12px !important;
-  padding-left: 16px;
-  border-left: 1px solid rgba(203, 213, 225, 0.2);
-  margin-left: 8px;
+  /* padding-left: 16px; */
+  /* border-left: 1px solid rgba(203, 213, 225, 0.2); */
+  /* margin-left: 8px; */
 }
 
 /* 主题选择器特殊样式 */
@@ -166,6 +166,7 @@ body {
   width: 1px;
   height: 24px;
   background: linear-gradient(180deg, transparent, rgba(203, 213, 225, 0.3), transparent);
+  display: none; /* 隐藏竖线 */
 }
 
 /* 夜间模式下的分隔线样式 */
@@ -174,7 +175,7 @@ body {
 .theme-modern-dark .top-toolbar .flex.items-center.gap-3,
 .theme-elegant-dark .top-toolbar .flex.items-center.gap-3,
 .theme-wechat-dark .top-toolbar .flex.items-center.gap-3 {
-  border-right-color: rgba(74, 85, 104, 0.3) !important;
+  /* border-right-color: rgba(74, 85, 104, 0.3) !important; */
 }
 
 .theme-dark .top-toolbar .flex.items-center.gap-4,
@@ -182,7 +183,7 @@ body {
 .theme-modern-dark .top-toolbar .flex.items-center.gap-4,
 .theme-elegant-dark .top-toolbar .flex.items-center.gap-4,
 .theme-wechat-dark .top-toolbar .flex.items-center.gap-4 {
-  border-left-color: rgba(74, 85, 104, 0.3) !important;
+  /* border-left-color: rgba(74, 85, 104, 0.3) !important; */
 }
 
 .theme-dark .top-toolbar .theme-selector::before,
@@ -190,7 +191,8 @@ body {
 .theme-modern-dark .top-toolbar .theme-selector::before,
 .theme-elegant-dark .top-toolbar .theme-selector::before,
 .theme-wechat-dark .top-toolbar .theme-selector::before {
-  background: linear-gradient(180deg, transparent, rgba(74, 85, 104, 0.3), transparent) !important;
+  /* background: linear-gradient(180deg, transparent, rgba(74, 85, 104, 0.3), transparent) !important; */
+  display: none !important;
 }
 
 .app-title {
@@ -577,14 +579,17 @@ body {
   position: relative;
 }
 
-.editor-content code {
-  background: rgba(148, 163, 184, 0.12);
-  color: #dc2626;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  font-size: 0.9em;
-  position: relative;
+.editor-content code,
+.preview-content code {
+  background: #f8f9fa;
+  color: #e74c3c;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.95em;
+  word-break: break-all;
+  /* 可选：加点阴影提升层次 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
 .editor-content pre {

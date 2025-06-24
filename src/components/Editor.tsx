@@ -311,6 +311,13 @@ const Editor: React.FC<EditorProps> = ({ content = '', onChange, onImageUpload }
           >
             <Code size={16} />
           </button>
+          <button
+            onClick={() => editor.chain().focus().toggleCode().run()}
+            className={`toolbar-button ${editor.isActive('code') ? 'is-active' : ''}`}
+            title="内联代码"
+          >
+            <Code size={16} />
+          </button>
         </div>
 
         {/* 对齐方式 */}
