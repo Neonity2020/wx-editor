@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夜间主题演示 - 微信公众号编辑器</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 40px;
+        }
+        
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .theme-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .theme-header {
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .theme-content {
+            padding: 20px;
+            min-height: 300px;
+        }
+        
+        /* 夜间模式主题 */
+        .theme-dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .theme-dark .theme-header {
+            background: rgba(45, 55, 72, 0.8);
+            color: #f7fafc;
+        }
+        
+        .theme-dark .theme-content {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .theme-dark h2 {
+            color: #90cdf4;
+        }
+        
+        .theme-dark h3 {
+            color: #81e6d9;
+        }
+        
+        .theme-dark blockquote {
+            border-left: 4px solid #4299e1;
+            background-color: #2d3748;
+            color: #a0aec0;
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .theme-dark code {
+            background-color: #2d3748;
+            color: #f6ad55;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            border: 1px solid #4a5568;
+        }
+        
+        /* Bear夜间主题 */
+        .theme-bear-dark {
+            background-color: #1d1d1f;
+            color: #f5f5f7;
+        }
+        
+        .theme-bear-dark .theme-header {
+            background: rgba(44, 44, 46, 0.8);
+            color: #f5f5f7;
+        }
+        
+        .theme-bear-dark .theme-content {
+            background-color: #1d1d1f;
+            color: #f5f5f7;
+        }
+        
+        .theme-bear-dark h2 {
+            color: #ff8e8e;
+        }
+        
+        .theme-bear-dark h3 {
+            color: #ffa5a5;
+        }
+        
+        .theme-bear-dark blockquote {
+            border-left: 3px solid #0a84ff;
+            background-color: #2c2c2e;
+            color: #a1a1a6;
+            padding: 0.8em 1.2em;
+            margin: 1.5em 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .theme-bear-dark code {
+            background-color: #2c2c2e;
+            color: #ff6b6b;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid #3a3a3c;
+        }
+        
+        /* 现代夜间主题 */
+        .theme-modern-dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .theme-modern-dark .theme-header {
+            background: rgba(30, 41, 59, 0.8);
+            color: #f8fafc;
+        }
+        
+        .theme-modern-dark .theme-content {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .theme-modern-dark h2 {
+            color: #93c5fd;
+        }
+        
+        .theme-modern-dark h3 {
+            color: #c4b5fd;
+        }
+        
+        .theme-modern-dark blockquote {
+            border-left: 4px solid #60a5fa;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #f1f5f9;
+            padding: 1.2em 1.8em;
+            margin: 1.8em 0;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #475569;
+        }
+        
+        .theme-modern-dark code {
+            background-color: #1e293b;
+            color: #fca5a5;
+            padding: 0.25em 0.5em;
+            border-radius: 6px;
+            border: 1px solid #475569;
+        }
+        
+        /* 优雅夜间主题 */
+        .theme-elegant-dark {
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        
+        .theme-elegant-dark .theme-header {
+            background: rgba(31, 41, 55, 0.8);
+            color: #f9fafb;
+        }
+        
+        .theme-elegant-dark .theme-content {
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        
+        .theme-elegant-dark h2 {
+            color: #d1d5db;
+        }
+        
+        .theme-elegant-dark h3 {
+            color: #9ca3af;
+        }
+        
+        .theme-elegant-dark blockquote {
+            border-left: 4px solid #8b5cf6;
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 0 5px 5px 0;
+            border: 1px solid #374151;
+        }
+        
+        .theme-elegant-dark code {
+            background-color: #1f2937;
+            color: #f87171;
+            padding: 0.3em 0.6em;
+            border-radius: 4px;
+            border: 1px solid #374151;
+        }
+        
+        /* 微信夜间主题 */
+        .theme-wechat-dark {
+            background-color: #1a1a1a;
+            color: #e5e7eb;
+        }
+        
+        .theme-wechat-dark .theme-header {
+            background: rgba(38, 38, 38, 0.8);
+            color: #f9fafb;
+        }
+        
+        .theme-wechat-dark .theme-content {
+            background-color: #1a1a1a;
+            color: #e5e7eb;
+        }
+        
+        .theme-wechat-dark h2 {
+            color: #34d399;
+        }
+        
+        .theme-wechat-dark h3 {
+            color: #6ee7b7;
+        }
+        
+        .theme-wechat-dark blockquote {
+            border-left: 4px solid #10b981;
+            background-color: #262626;
+            color: #a3a3a3;
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #404040;
+        }
+        
+        .theme-wechat-dark code {
+            background-color: #262626;
+            color: #10b981;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            border: 1px solid #404040;
+        }
+        
+        .features {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .features h2 {
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌙 夜间主题演示</h1>
+        
+        <div class="theme-grid">
+            <!-- 夜间模式 -->
+            <div class="theme-card theme-dark">
+                <div class="theme-header">夜间模式</div>
+                <div class="theme-content">
+                    <h2>护眼的夜间阅读模式</h2>
+                    <p>使用深蓝灰色背景和柔和的文字颜色，为夜间阅读提供舒适的视觉体验。</p>
+                    
+                    <h3>代码示例</h3>
+                    <code>console.log("Hello, 夜间模式!");</code>
+                    
+                    <blockquote>
+                        这是一个引用块，在夜间模式下有特殊的背景色和边框样式。
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- Bear夜间主题 -->
+            <div class="theme-card theme-bear-dark">
+                <div class="theme-header">Bear夜间主题</div>
+                <div class="theme-content">
+                    <h2>Bear笔记夜间风格</h2>
+                    <p>采用Bear笔记的设计理念，使用红色作为强调色，提供护眼舒适的阅读体验。</p>
+                    
+                    <h3>代码示例</h3>
+                    <code>function bearTheme() { return "优雅"; }</code>
+                    
+                    <blockquote>
+                        Bear风格的引用块，带有蓝色边框和深色背景。
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- 现代夜间主题 -->
+            <div class="theme-card theme-modern-dark">
+                <div class="theme-header">现代夜间主题</div>
+                <div class="theme-content">
+                    <h2>现代简约夜间风格</h2>
+                    <p>采用现代设计语言，使用渐变效果和蓝色系配色，展现科技感。</p>
+                    
+                    <h3>代码示例</h3>
+                    <code>const modern = "简约而强大";</code>
+                    
+                    <blockquote>
+                        现代风格的引用块，带有渐变背景和蓝色边框。
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- 优雅夜间主题 -->
+            <div class="theme-card theme-elegant-dark">
+                <div class="theme-header">优雅夜间主题</div>
+                <div class="theme-content">
+                    <h2>优雅的夜间阅读体验</h2>
+                    <p>使用优雅的字体排版和紫色系配色，提供精致的阅读体验。</p>
+                    
+                    <h3>代码示例</h3>
+                    <code>let elegant = "精致而优雅";</code>
+                    
+                    <blockquote>
+                        优雅风格的引用块，带有紫色边框和深色背景。
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- 微信夜间主题 -->
+            <div class="theme-card theme-wechat-dark">
+                <div class="theme-header">微信夜间主题</div>
+                <div class="theme-content">
+                    <h2>微信公众号夜间专用样式</h2>
+                    <p>专为微信公众号设计的夜间主题，使用微信绿色作为强调色。</p>
+                    
+                    <h3>代码示例</h3>
+                    <code>const wechat = "微信风格";</code>
+                    
+                    <blockquote>
+                        微信风格的引用块，带有绿色边框和深色背景。
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>夜间模式特色功能</h2>
+            <ul>
+                <li>护眼配色方案，减少眼部疲劳</li>
+                <li>完整的界面适配，包括工具栏和侧边栏</li>
+                <li>响应式设计，适配各种设备</li>
+                <li>保持所有编辑功能的完整性</li>
+                <li>优化的滚动条和交互效果</li>
+                <li>支持代码块、表格、列表等所有元素</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,2930 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
+  color: #1e293b;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 按钮样式 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #64748b;
+  border: 1px solid rgba(203, 213, 225, 0.5);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #475569;
+  border-color: rgba(148, 163, 184, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-purple {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+}
+
+.btn-purple:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* 顶部工具栏 - Bear 风格 */
+.top-toolbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  padding: 12px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 10;
+}
+
+/* 顶部工具栏布局优化 */
+.top-toolbar .flex.items-center.justify-between {
+  gap: 24px;
+}
+
+/* 左侧按钮组样式优化 */
+.top-toolbar .flex.items-center.gap-3 {
+  gap: 12px !important;
+  padding-right: 16px;
+  border-right: 1px solid rgba(203, 213, 225, 0.2);
+  margin-right: 8px;
+}
+
+/* 右侧按钮组样式优化 */
+.top-toolbar .flex.items-center.gap-4 {
+  gap: 12px !important;
+  padding-left: 16px;
+  border-left: 1px solid rgba(203, 213, 225, 0.2);
+  margin-left: 8px;
+}
+
+/* 主题选择器特殊样式 */
+.top-toolbar .theme-selector {
+  margin-right: 8px;
+  position: relative;
+}
+
+.top-toolbar .theme-selector::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(180deg, transparent, rgba(203, 213, 225, 0.3), transparent);
+}
+
+/* 夜间模式下的分隔线样式 */
+.theme-dark .top-toolbar .flex.items-center.gap-3,
+.theme-bear-dark .top-toolbar .flex.items-center.gap-3,
+.theme-modern-dark .top-toolbar .flex.items-center.gap-3,
+.theme-elegant-dark .top-toolbar .flex.items-center.gap-3,
+.theme-wechat-dark .top-toolbar .flex.items-center.gap-3 {
+  border-right-color: rgba(74, 85, 104, 0.3) !important;
+}
+
+.theme-dark .top-toolbar .flex.items-center.gap-4,
+.theme-bear-dark .top-toolbar .flex.items-center.gap-4,
+.theme-modern-dark .top-toolbar .flex.items-center.gap-4,
+.theme-elegant-dark .top-toolbar .flex.items-center.gap-4,
+.theme-wechat-dark .top-toolbar .flex.items-center.gap-4 {
+  border-left-color: rgba(74, 85, 104, 0.3) !important;
+}
+
+.theme-dark .top-toolbar .theme-selector::before,
+.theme-bear-dark .top-toolbar .theme-selector::before,
+.theme-modern-dark .top-toolbar .theme-selector::before,
+.theme-elegant-dark .top-toolbar .theme-selector::before,
+.theme-wechat-dark .top-toolbar .theme-selector::before {
+  background: linear-gradient(180deg, transparent, rgba(74, 85, 104, 0.3), transparent) !important;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 编辑器容器 */
+.editor-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: none !important;
+  background-color: transparent !important;
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  margin: 0;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 1px solid rgba(203, 213, 225, 0.2);
+  min-height: 0;
+  max-height: 90vh;
+  flex: 1;
+}
+
+/* 编辑器Banner */
+.editor-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  background: linear-gradient(135deg, #ff585d 0%, #ff9472 50%, #ffb199 100%) !important;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ff585d;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+  mix-blend-mode: overlay;
+}
+
+.banner-image:hover {
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+/* Banner内容覆盖层 */
+.editor-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 88, 93, 0.8) 0%,
+    rgba(255, 148, 114, 0.6) 50%,
+    rgba(255, 177, 153, 0.4) 100%
+  ) !important;
+  z-index: 1;
+}
+
+/* Banner文字内容 */
+.editor-banner::after {
+  content: '欢迎使用微信编辑器';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff0f0;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(255, 88, 93, 0.25);
+  letter-spacing: -0.02em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* 编辑器工具栏 */
+.editor-toolbar {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 64px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(248, 250, 252, 0.6);
+  border: 1px solid rgba(203, 213, 225, 0.2);
+}
+
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  font-size: 14px;
+}
+
+.toolbar-button:hover {
+  background: rgba(148, 163, 184, 0.12);
+  color: #475569;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-button.is-active {
+  background: rgba(102, 126, 234, 0.12);
+  color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.toolbar-button.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+/* 编辑器内容区域 */
+.editor-content {
+  flex: 1;
+  padding: 32px 40px;
+  overflow-y: auto;
+  background: none !important;
+  background-color: transparent !important;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1e293b;
+  outline: none;
+  border: none !important;
+  box-shadow: none !important;
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  min-height: 0;
+  position: relative;
+  max-height: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.6) rgba(248, 250, 252, 0.8);
+}
+
+.editor-content:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 去除TipTap编辑器的聚焦边框 */
+.editor-content .ProseMirror {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  height: 100%;
+  min-height: 100%;
+  /* overflow: visible; */
+}
+
+.editor-content .ProseMirror:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.editor-content .ProseMirror-focused {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 去除所有可能的聚焦样式 */
+.editor-content *:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 编辑器内容元素样式 */
+.editor-content h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 32px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.editor-content h2 {
+  font-size: 2em;
+  font-weight: 600;
+  color: #334155;
+  margin: 40px 0 20px 0;
+  line-height: 1.3;
+  position: relative;
+}
+
+.editor-content h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #475569;
+  margin: 32px 0 16px 0;
+  line-height: 1.4;
+  position: relative;
+}
+
+.editor-content h4 {
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #64748b;
+  margin: 28px 0 12px 0;
+  line-height: 1.4;
+  position: relative;
+}
+
+.editor-content p {
+  margin: 0 0 20px 0;
+  color: #475569;
+  line-height: 1.7;
+  position: relative;
+}
+
+.editor-content strong {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.editor-content em {
+  font-style: italic;
+  color: #64748b;
+}
+
+.editor-content ul {
+  list-style: disc;
+  padding-left: 2em;
+}
+
+.editor-content ul li {
+  position: static;
+  padding-left: 0;
+  margin: 10px 0;
+}
+
+.editor-content ul li::before {
+  display: none !important;
+}
+
+/* 嵌套无序列表样式 */
+.editor-content ul ul {
+  margin: 8px 0 8px 16px;
+}
+
+.editor-content ul ul li::before {
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.editor-content ul ul ul li::before {
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 多级有序列表缩进优化 */
+.editor-content ol {
+  list-style: decimal;
+  padding-left: 2em;
+}
+
+.editor-content ol ol {
+  list-style-type: lower-alpha;
+  padding-left: 2em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.editor-content ol ol ol {
+  list-style-type: lower-roman;
+  padding-left: 2em;
+}
+
+/* 列表项内容样式 */
+.editor-content li p {
+  margin: 0;
+  display: inline;
+}
+
+.editor-content li strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.editor-content li em {
+  color: #64748b;
+  font-style: italic;
+}
+
+.editor-content li code {
+  background: rgba(148, 163, 184, 0.12);
+  color: #dc2626;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.85em;
+}
+
+/* 列表项内的链接样式 */
+.editor-content li a {
+  color: #667eea;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.editor-content li a:hover {
+  color: #5a67d8;
+  border-bottom-color: #5a67d8;
+}
+
+.editor-content blockquote {
+  margin: 32px 0;
+  padding: 20px 28px;
+  background: rgba(102, 126, 234, 0.05);
+  border-left: 4px solid #667eea;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: #64748b;
+  position: relative;
+}
+
+.editor-content code {
+  background: rgba(148, 163, 184, 0.12);
+  color: #dc2626;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+  position: relative;
+}
+
+.editor-content pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 24px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 32px 0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.editor-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 16px 0;
+}
+
+.editor-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.editor-content a {
+  color: #667eea;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.editor-content a:hover {
+  color: #5a67d8;
+  border-bottom-color: #5a67d8;
+}
+
+.editor-content hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+  margin: 40px 0;
+  position: relative;
+}
+
+.editor-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.editor-content th,
+.editor-content td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.editor-content th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #1e293b;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.editor-content tr:hover {
+  background: rgba(102, 126, 234, 0.02);
+}
+
+/* 滚动条样式 */
+.editor-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.editor-content::-webkit-scrollbar-track {
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.editor-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.6);
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  border: 2px solid rgba(248, 250, 252, 0.8);
+}
+
+.editor-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
+}
+
+/* 强制显示滚动条（仅在内容超出时） */
+.editor-content::-webkit-scrollbar-thumb:vertical {
+  min-height: 40px;
+}
+
+/* 链接输入框 */
+.link-input-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  padding: 16px 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.link-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(203, 213, 225, 0.5);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.link-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 颜色选择器 */
+.color-picker {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式布局优化 */
+@media (max-width: 768px) {
+  .editor-container {
+    margin: 0;
+    border-radius: 12px;
+    height: 100vh;
+    max-height: 100vh;
+    background: none !important;
+    background-color: transparent !important;
+  }
+  
+  .editor-banner {
+    height: 120px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  
+  .editor-toolbar {
+    padding: 12px 16px;
+    gap: 8px;
+    min-height: 56px;
+  }
+  
+  .toolbar-group {
+    gap: 4px;
+    padding: 4px;
+  }
+  
+  .toolbar-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .editor-content {
+    padding: 20px 24px;
+    font-size: 15px;
+    flex: 1;
+    background: none !important;
+    background-color: transparent !important;
+  }
+  
+  .editor-content h1 {
+    font-size: 2em;
+    margin-bottom: 24px;
+  }
+  
+  .editor-content h2 {
+    font-size: 1.6em;
+    margin: 32px 0 16px 0;
+  }
+  
+  .editor-content h3 {
+    font-size: 1.3em;
+    margin: 24px 0 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .editor-container {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 8px;
+    background: none !important;
+    background-color: transparent !important;
+  }
+  
+  .editor-toolbar {
+    padding: 8px 12px;
+    gap: 6px;
+    min-height: 48px;
+  }
+  
+  .toolbar-group {
+    gap: 2px;
+    padding: 2px;
+  }
+  
+  .editor-content {
+    padding: 16px 20px;
+    font-size: 14px;
+    flex: 1;
+    background: none !important;
+    background-color: transparent !important;
+  }
+  
+  .editor-content h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  .editor-content h2 {
+    font-size: 1.4em;
+    margin: 24px 0 12px 0;
+  }
+  
+  .editor-content h3 {
+    font-size: 1.2em;
+    margin: 20px 0 10px 0;
+  }
+  
+  .editor-content blockquote {
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+  
+  .editor-content pre {
+    padding: 16px;
+    margin: 24px 0;
+  }
+}
+
+/* 主题选择器 */
+.theme-selector {
+  position: relative;
+  min-width: 120px;
+}
+
+.theme-selector select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 8px;
+  padding: 8px 32px 8px 12px;
+  font-size: 14px;
+  color: #475569;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.theme-selector select:hover {
+  border-color: rgba(148, 163, 184, 0.5);
+  background: rgba(255, 255, 255, 1);
+}
+
+.theme-selector select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 添加下拉箭头 */
+.theme-selector::after {
+  content: '▼';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.2s ease;
+  z-index: 1;
+}
+
+.theme-selector:hover::after {
+  color: #475569;
+}
+
+/* 预览容器 */
+.preview-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(203, 213, 225, 0.2);
+  overflow-y: auto;
+}
+
+.preview-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1e293b;
+}
+
+.preview-content h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.preview-content h2 {
+  font-size: 2em;
+  font-weight: 600;
+  color: #334155;
+  margin: 32px 0 16px 0;
+  line-height: 1.3;
+}
+
+.preview-content h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #475569;
+  margin: 24px 0 12px 0;
+  line-height: 1.4;
+}
+
+.preview-content h4 {
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #64748b;
+  margin: 20px 0 10px 0;
+  line-height: 1.4;
+}
+
+.preview-content p {
+  margin: 0 0 16px 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.preview-content strong {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.preview-content em {
+  font-style: italic;
+  color: #64748b;
+}
+
+.preview-content ul, .preview-content ol {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.preview-content li {
+  margin: 8px 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* 预览区域无序列表样式优化 */
+.preview-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.preview-content ul li {
+  position: relative;
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.preview-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(102, 126, 234, 0.3);
+}
+
+/* 预览区域嵌套无序列表样式 */
+.preview-content ul ul {
+  margin: 6px 0 6px 12px;
+}
+
+.preview-content ul ul li::before {
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.preview-content ul ul ul li::before {
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 预览区域有序列表样式优化 */
+.preview-content ol {
+  list-style: none;
+  counter-reset: preview-list-counter;
+  padding-left: 0;
+}
+
+.preview-content ol li {
+  position: relative;
+  padding-left: 28px;
+  margin: 10px 0;
+  counter-increment: preview-list-counter;
+}
+
+.preview-content ol li::before {
+  content: counter(preview-list-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+  line-height: 1;
+}
+
+/* 预览区域嵌套有序列表样式 */
+.preview-content ol ol {
+  margin: 6px 0 6px 12px;
+  counter-reset: preview-sub-counter;
+}
+
+.preview-content ol ol li {
+  counter-increment: preview-sub-counter;
+  padding-left: 24px;
+}
+
+.preview-content ol ol li::before {
+  content: counter(preview-list-counter) '.' counter(preview-sub-counter);
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  font-size: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.preview-content ol ol ol li {
+  counter-increment: preview-sub-sub-counter;
+  padding-left: 20px;
+}
+
+.preview-content ol ol ol li::before {
+  content: counter(preview-list-counter) '.' counter(preview-sub-counter) '.' counter(preview-sub-sub-counter);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  font-size: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 预览区域列表项内容样式 */
+.preview-content li p {
+  margin: 0;
+  display: inline;
+}
+
+.preview-content li strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.preview-content li em {
+  color: #64748b;
+  font-style: italic;
+}
+
+.preview-content li code {
+  background: rgba(148, 163, 184, 0.12);
+  color: #dc2626;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.85em;
+}
+
+/* 预览区域列表项内的链接样式 */
+.preview-content li a {
+  color: #667eea;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.preview-content li a:hover {
+  color: #5a67d8;
+  border-bottom-color: #5a67d8;
+}
+
+.preview-content blockquote {
+  margin: 24px 0;
+  padding: 16px 24px;
+  background: rgba(102, 126, 234, 0.05);
+  border-left: 4px solid #667eea;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #64748b;
+}
+
+.preview-content code {
+  background: rgba(148, 163, 184, 0.1);
+  color: #dc2626;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.preview-content pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 24px 0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.preview-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.preview-content a {
+  color: #667eea;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.preview-content a:hover {
+  color: #5a67d8;
+  border-bottom-color: #5a67d8;
+}
+
+.preview-content hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+  margin: 32px 0;
+}
+
+.preview-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preview-content th,
+.preview-content td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+}
+
+.preview-content th {
+  background: rgba(248, 250, 252, 0.8);
+  font-weight: 600;
+  color: #475569;
+}
+
+.preview-content tr:hover {
+  background: rgba(248, 250, 252, 0.5);
+}
+
+/* 加载指示器 */
+.loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+/* 设置面板 */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.settings-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(203, 213, 225, 0.2);
+}
+
+.settings-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.settings-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1e293b;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: white;
+}
+
+/* 顶部工具栏 */
+.top-toolbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.2);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  }
+
+/* 按钮样式 */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #64748b;
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(10px);
+  }
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #475569;
+  border-color: rgba(148, 163, 184, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  }
+
+.btn-purple:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+/* 复制到微信公众号专用样式，保证列表符号兼容 */
+.wx-copy-content ul,
+.wx-copy-content ol {
+  list-style: initial;
+  padding-left: 2em;
+}
+
+.wx-copy-content ul li,
+.wx-copy-content ol li {
+  position: static;
+  padding-left: 0;
+  margin: 0.5em 0;
+}
+
+.wx-copy-content ul li::before,
+.wx-copy-content ol li::before {
+  display: none !important;
+}
+
+/* 夜间模式主题全局样式 */
+.theme-dark,
+.theme-bear-dark,
+.theme-modern-dark,
+.theme-elegant-dark,
+.theme-wechat-dark {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+.theme-dark body,
+.theme-bear-dark body,
+.theme-modern-dark body,
+.theme-elegant-dark body,
+.theme-wechat-dark body,
+.theme-dark html,
+.theme-bear-dark html,
+.theme-modern-dark html,
+.theme-elegant-dark html,
+.theme-wechat-dark html {
+  background-color: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+.theme-dark .settings-overlay,
+.theme-bear-dark .settings-overlay,
+.theme-modern-dark .settings-overlay,
+.theme-elegant-dark .settings-overlay,
+.theme-wechat-dark .settings-overlay {
+  background: rgba(26, 32, 44, 0.7) !important;
+  backdrop-filter: blur(6px);
+}
+.theme-dark .loading-indicator,
+.theme-bear-dark .loading-indicator,
+.theme-modern-dark .loading-indicator,
+.theme-elegant-dark .loading-indicator,
+.theme-wechat-dark .loading-indicator {
+  background: rgba(26, 32, 44, 0.95) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(74, 85, 104, 0.3);
+}
+.theme-dark .empty-state,
+.theme-bear-dark .empty-state,
+.theme-modern-dark .empty-state,
+.theme-elegant-dark .empty-state,
+.theme-wechat-dark .empty-state {
+  color: #a0aec0 !important;
+  background: none !important;
+}
+.theme-dark .stat-label,
+.theme-bear-dark .stat-label,
+.theme-modern-dark .stat-label,
+.theme-elegant-dark .stat-label,
+.theme-wechat-dark .stat-label {
+  color: #a0aec0 !important;
+}
+.theme-dark .stat-value,
+.theme-bear-dark .stat-value,
+.theme-modern-dark .stat-value,
+.theme-elegant-dark .stat-value,
+.theme-wechat-dark .stat-value {
+  color: #f7fafc !important;
+}
+.theme-dark .loading-container,
+.theme-bear-dark .loading-container,
+.theme-modern-dark .loading-container,
+.theme-elegant-dark .loading-container,
+.theme-wechat-dark .loading-container {
+  color: #a0aec0 !important;
+  background: none !important;
+}
+
+/* 夜间模式 - 编辑器容器 */
+.theme-dark .editor-container,
+.theme-bear-dark .editor-container,
+.theme-modern-dark .editor-container,
+.theme-elegant-dark .editor-container,
+.theme-wechat-dark .editor-container {
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(74, 85, 104, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 夜间模式 - 顶部工具栏 */
+.theme-dark .top-toolbar,
+.theme-bear-dark .top-toolbar,
+.theme-modern-dark .top-toolbar,
+.theme-elegant-dark .top-toolbar,
+.theme-wechat-dark .top-toolbar {
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+.theme-dark .app-title,
+.theme-bear-dark .app-title,
+.theme-modern-dark .app-title,
+.theme-elegant-dark .app-title,
+.theme-wechat-dark .app-title {
+  color: #f7fafc !important;
+}
+
+/* 夜间模式 - 编辑器工具栏 */
+.theme-dark .editor-toolbar,
+.theme-bear-dark .editor-toolbar,
+.theme-modern-dark .editor-toolbar,
+.theme-elegant-dark .editor-toolbar,
+.theme-wechat-dark .editor-toolbar {
+  background: rgba(26, 32, 44, 0.98) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+.theme-dark .toolbar-group,
+.theme-bear-dark .toolbar-group,
+.theme-modern-dark .toolbar-group,
+.theme-elegant-dark .toolbar-group,
+.theme-wechat-dark .toolbar-group {
+  background: rgba(45, 55, 72, 0.6) !important;
+  border: 1px solid rgba(74, 85, 104, 0.3);
+}
+
+.theme-dark .toolbar-button,
+.theme-bear-dark .toolbar-button,
+.theme-modern-dark .toolbar-button,
+.theme-elegant-dark .toolbar-button,
+.theme-wechat-dark .toolbar-button {
+  color: #a0aec0;
+}
+
+.theme-dark .toolbar-button:hover,
+.theme-bear-dark .toolbar-button:hover,
+.theme-modern-dark .toolbar-button:hover,
+.theme-elegant-dark .toolbar-button:hover,
+.theme-wechat-dark .toolbar-button:hover {
+  background: rgba(148, 163, 184, 0.2) !important;
+  color: #e2e8f0;
+}
+
+.theme-dark .toolbar-button.is-active,
+.theme-bear-dark .toolbar-button.is-active,
+.theme-modern-dark .toolbar-button.is-active,
+.theme-elegant-dark .toolbar-button.is-active,
+.theme-wechat-dark .toolbar-button.is-active {
+  background: rgba(99, 179, 237, 0.2) !important;
+  color: #63b3ed;
+}
+
+/* 夜间模式 - 编辑器内容区域 */
+.theme-dark .editor-content,
+.theme-bear-dark .editor-content,
+.theme-modern-dark .editor-content,
+.theme-elegant-dark .editor-content,
+.theme-wechat-dark .editor-content {
+  background: transparent !important;
+  color: #e2e8f0;
+}
+
+/* 夜间模式 - 预览容器 */
+.theme-dark .preview-container,
+.theme-bear-dark .preview-container,
+.theme-modern-dark .preview-container,
+.theme-elegant-dark .preview-container,
+.theme-wechat-dark .preview-container {
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+/* 夜间模式 - 设置面板 */
+.theme-dark .settings-panel,
+.theme-bear-dark .settings-panel,
+.theme-modern-dark .settings-panel,
+.theme-elegant-dark .settings-panel,
+.theme-wechat-dark .settings-panel {
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+/* 夜间模式 - 设置面板滚动条 */
+.theme-dark .settings-panel::-webkit-scrollbar-track,
+.theme-bear-dark .settings-panel::-webkit-scrollbar-track,
+.theme-modern-dark .settings-panel::-webkit-scrollbar-track,
+.theme-elegant-dark .settings-panel::-webkit-scrollbar-track,
+.theme-wechat-dark .settings-panel::-webkit-scrollbar-track {
+  background: rgba(45, 55, 72, 0.8) !important;
+}
+
+.theme-dark .settings-panel::-webkit-scrollbar-thumb,
+.theme-bear-dark .settings-panel::-webkit-scrollbar-thumb,
+.theme-modern-dark .settings-panel::-webkit-scrollbar-thumb,
+.theme-elegant-dark .settings-panel::-webkit-scrollbar-thumb,
+.theme-wechat-dark .settings-panel::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.6) !important;
+}
+
+.theme-dark .settings-panel::-webkit-scrollbar-thumb:hover,
+.theme-bear-dark .settings-panel::-webkit-scrollbar-thumb:hover,
+.theme-modern-dark .settings-panel::-webkit-scrollbar-thumb:hover,
+.theme-elegant-dark .settings-panel::-webkit-scrollbar-thumb:hover,
+.theme-wechat-dark .settings-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8) !important;
+}
+
+.theme-dark .settings-label,
+.theme-bear-dark .settings-label,
+.theme-modern-dark .settings-label,
+.theme-elegant-dark .settings-label,
+.theme-wechat-dark .settings-label {
+  color: #a0aec0;
+}
+
+.theme-dark .settings-input,
+.theme-bear-dark .settings-input,
+.theme-modern-dark .settings-input,
+.theme-elegant-dark .settings-input,
+.theme-wechat-dark .settings-input {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+.theme-dark .settings-input:focus,
+.theme-bear-dark .settings-input:focus,
+.theme-modern-dark .settings-input:focus,
+.theme-elegant-dark .settings-input:focus,
+.theme-wechat-dark .settings-input:focus {
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+  background: rgba(45, 55, 72, 1) !important;
+}
+
+/* 夜间模式 - 主题选择器 */
+.theme-dark .theme-selector select,
+.theme-bear-dark .theme-selector select,
+.theme-modern-dark .theme-selector select,
+.theme-elegant-dark .theme-selector select,
+.theme-wechat-dark .theme-selector select {
+  background: rgba(45, 55, 72, 0.9) !important;
+  border: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
+}
+
+.theme-dark .theme-selector select:hover,
+.theme-bear-dark .theme-selector select:hover,
+.theme-modern-dark .theme-selector select:hover,
+.theme-elegant-dark .theme-selector select:hover,
+.theme-wechat-dark .theme-selector select:hover {
+  border-color: rgba(148, 163, 184, 0.5);
+  background: rgba(45, 55, 72, 1) !important;
+}
+
+.theme-dark .theme-selector select:focus,
+.theme-bear-dark .theme-selector select:focus,
+.theme-modern-dark .theme-selector select:focus,
+.theme-elegant-dark .theme-selector select:focus,
+.theme-wechat-dark .theme-selector select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 夜间模式 - 文章详情侧边栏 */
+.theme-dark .bg-white,
+.theme-bear-dark .bg-white,
+.theme-modern-dark .bg-white,
+.theme-elegant-dark .bg-white,
+.theme-wechat-dark .bg-white {
+  background-color: rgba(26, 32, 44, 0.95) !important;
+  color: #e2e8f0;
+}
+
+.theme-dark .border-gray-200,
+.theme-bear-dark .border-gray-200,
+.theme-modern-dark .border-gray-200,
+.theme-elegant-dark .border-gray-200,
+.theme-wechat-dark .border-gray-200 {
+  border-color: rgba(74, 85, 104, 0.3) !important;
+}
+
+.theme-dark .text-gray-800,
+.theme-bear-dark .text-gray-800,
+.theme-modern-dark .text-gray-800,
+.theme-elegant-dark .text-gray-800,
+.theme-wechat-dark .text-gray-800 {
+  color: #f7fafc !important;
+}
+
+.theme-dark .text-gray-700,
+.theme-bear-dark .text-gray-700,
+.theme-modern-dark .text-gray-700,
+.theme-elegant-dark .text-gray-700,
+.theme-wechat-dark .text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .text-gray-500,
+.theme-bear-dark .text-gray-500,
+.theme-modern-dark .text-gray-500,
+.theme-elegant-dark .text-gray-500,
+.theme-wechat-dark .text-gray-500 {
+  color: #a0aec0 !important;
+}
+
+.theme-dark .border-gray-300,
+.theme-bear-dark .border-gray-300,
+.theme-modern-dark .border-gray-300,
+.theme-elegant-dark .border-gray-300,
+.theme-wechat-dark .border-gray-300 {
+  border-color: rgba(74, 85, 104, 0.3) !important;
+}
+
+.theme-dark .bg-gray-100,
+.theme-bear-dark .bg-gray-100,
+.theme-modern-dark .bg-gray-100,
+.theme-elegant-dark .bg-gray-100,
+.theme-wechat-dark .bg-gray-100 {
+  background-color: rgba(45, 55, 72, 0.8) !important;
+}
+
+/* 夜间模式 - 图片管理器 */
+.theme-dark .image-manager-modal,
+.theme-bear-dark .image-manager-modal,
+.theme-modern-dark .image-manager-modal,
+.theme-elegant-dark .image-manager-modal,
+.theme-wechat-dark .image-manager-modal {
+  background: rgba(26, 32, 44, 0.95) !important;
+  color: #e2e8f0;
+}
+
+.theme-dark .image-manager-header,
+.theme-bear-dark .image-manager-header,
+.theme-modern-dark .image-manager-header,
+.theme-elegant-dark .image-manager-header,
+.theme-wechat-dark .image-manager-header {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+}
+
+.theme-dark .image-manager-title,
+.theme-bear-dark .image-manager-title,
+.theme-modern-dark .image-manager-title,
+.theme-elegant-dark .image-manager-title,
+.theme-wechat-dark .image-manager-title {
+  color: #f7fafc;
+}
+
+.theme-dark .close-button,
+.theme-bear-dark .close-button,
+.theme-modern-dark .close-button,
+.theme-elegant-dark .close-button,
+.theme-wechat-dark .close-button {
+  color: #a0aec0;
+}
+
+.theme-dark .close-button:hover,
+.theme-bear-dark .close-button:hover,
+.theme-modern-dark .close-button:hover,
+.theme-elegant-dark .close-button:hover,
+.theme-wechat-dark .close-button:hover {
+  background: rgba(148, 163, 184, 0.2);
+  color: #e2e8f0;
+}
+
+/* 夜间模式 - 滚动条样式 */
+.theme-dark .editor-content::-webkit-scrollbar-track,
+.theme-bear-dark .editor-content::-webkit-scrollbar-track,
+.theme-modern-dark .editor-content::-webkit-scrollbar-track,
+.theme-elegant-dark .editor-content::-webkit-scrollbar-track,
+.theme-wechat-dark .editor-content::-webkit-scrollbar-track {
+  background: rgba(45, 55, 72, 0.8);
+}
+
+.theme-dark .editor-content::-webkit-scrollbar-thumb,
+.theme-bear-dark .editor-content::-webkit-scrollbar-thumb,
+.theme-modern-dark .editor-content::-webkit-scrollbar-thumb,
+.theme-elegant-dark .editor-content::-webkit-scrollbar-thumb,
+.theme-wechat-dark .editor-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.6);
+  border: 2px solid rgba(45, 55, 72, 0.8);
+}
+
+.theme-dark .editor-content::-webkit-scrollbar-thumb:hover,
+.theme-bear-dark .editor-content::-webkit-scrollbar-thumb:hover,
+.theme-modern-dark .editor-content::-webkit-scrollbar-thumb:hover,
+.theme-elegant-dark .editor-content::-webkit-scrollbar-thumb:hover,
+.theme-wechat-dark .editor-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
+}
+
+/* 顶部工具栏响应式优化 */
+@media (max-width: 900px) {
+  .top-toolbar {
+    flex-direction: column !important;
+    padding: 8px 8px !important;
+    gap: 8px !important;
+  }
+  .top-toolbar > div {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+  .app-title {
+    font-size: 16px !important;
+    gap: 4px !important;
+  }
+  .top-toolbar .flex.items-center.gap-8 {
+    gap: 4px !important;
+  }
+  .top-toolbar .flex.items-center.gap-3 {
+    gap: 4px !important;
+    flex-wrap: wrap !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+  .top-toolbar .flex.items-center.gap-4 {
+    gap: 4px !important;
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    padding-bottom: 4px;
+    border-left: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  .top-toolbar .theme-selector::before {
+    display: none !important;
+  }
+  .btn-primary, .btn-success, .btn-purple, .btn-secondary {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    min-width: 80px;
+  }
+  .theme-selector {
+    min-width: 100px !important;
+    margin-right: 0 !important;
+  }
+  .theme-selector select {
+    font-size: 13px !important;
+    padding: 6px 28px 6px 10px !important;
+  }
+  .theme-selector::after {
+    right: 10px !important;
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .top-toolbar {
+    padding: 4px 2px !important;
+  }
+  .app-title {
+    font-size: 14px !important;
+  }
+  .btn-primary, .btn-success, .btn-purple, .btn-secondary {
+    font-size: 12px !important;
+    padding: 4px 6px !important;
+    min-width: 60px;
+  }
+  .theme-selector {
+    min-width: 80px !important;
+  }
+  .theme-selector select {
+    font-size: 12px !important;
+    padding: 4px 24px 4px 8px !important;
+  }
+  .theme-selector::after {
+    right: 8px !important;
+    font-size: 8px !important;
+  }
+}
+
+/* 图片上传状态指示器 */
+.upload-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  z-index: 1000;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.upload-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 工具栏按钮加载状态 */
+.toolbar-button.is-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 图片管理器样式 */
+.image-manager-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.image-manager-modal {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.image-manager-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  background: rgba(248, 250, 252, 0.8);
+}
+
+.image-manager-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: rgba(148, 163, 184, 0.12);
+  color: #475569;
+}
+
+.image-manager-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px 24px;
+  background: rgba(248, 250, 252, 0.5);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.2);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.image-manager-actions {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.2);
+}
+
+.image-manager-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  color: #64748b;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 20px;
+  color: #64748b;
+  text-align: center;
+}
+
+.empty-state p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.empty-state span {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.image-item {
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+/* 文章管理器夜间模式适配 */
+.theme-dark .article-manager-panel,
+.theme-bear-dark .article-manager-panel,
+.theme-modern-dark .article-manager-panel,
+.theme-elegant-dark .article-manager-panel,
+.theme-wechat-dark .article-manager-panel {
+  background: #232a36 !important;
+  border-right: 1px solid #374151 !important;
+}
+.theme-dark .article-manager-panel .border-gray-200,
+.theme-bear-dark .article-manager-panel .border-gray-200,
+.theme-modern-dark .article-manager-panel .border-gray-200,
+.theme-elegant-dark .article-manager-panel .border-gray-200,
+.theme-wechat-dark .article-manager-panel .border-gray-200 {
+  border-color: #374151 !important;
+}
+.theme-dark .article-manager-panel .bg-white,
+.theme-bear-dark .article-manager-panel .bg-white,
+.theme-modern-dark .article-manager-panel .bg-white,
+.theme-elegant-dark .article-manager-panel .bg-white,
+.theme-wechat-dark .article-manager-panel .bg-white {
+  background: #232a36 !important;
+}
+.theme-dark .article-manager-panel .text-gray-800,
+.theme-bear-dark .article-manager-panel .text-gray-800,
+.theme-modern-dark .article-manager-panel .text-gray-800,
+.theme-elegant-dark .article-manager-panel .text-gray-800,
+.theme-wechat-dark .article-manager-panel .text-gray-800 {
+  color: #f7fafc !important;
+}
+.theme-dark .article-manager-panel .text-gray-900,
+.theme-bear-dark .article-manager-panel .text-gray-900,
+.theme-modern-dark .article-manager-panel .text-gray-900,
+.theme-elegant-dark .article-manager-panel .text-gray-900,
+.theme-wechat-dark .article-manager-panel .text-gray-900 {
+  color: #e2e8f0 !important;
+}
+.theme-dark .article-manager-panel .text-gray-500,
+.theme-bear-dark .article-manager-panel .text-gray-500,
+.theme-modern-dark .article-manager-panel .text-gray-500,
+.theme-elegant-dark .article-manager-panel .text-gray-500,
+.theme-wechat-dark .article-manager-panel .text-gray-500 {
+  color: #a0aec0 !important;
+}
+.theme-dark .article-manager-panel .text-gray-400,
+.theme-bear-dark .article-manager-panel .text-gray-400,
+.theme-modern-dark .article-manager-panel .text-gray-400,
+.theme-elegant-dark .article-manager-panel .text-gray-400,
+.theme-wechat-dark .article-manager-panel .text-gray-400 {
+  color: #64748b !important;
+}
+.theme-dark .article-manager-panel .bg-gray-100,
+.theme-bear-dark .article-manager-panel .bg-gray-100,
+.theme-modern-dark .article-manager-panel .bg-gray-100,
+.theme-elegant-dark .article-manager-panel .bg-gray-100,
+.theme-wechat-dark .article-manager-panel .bg-gray-100 {
+  background: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+.theme-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-bear-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-modern-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-elegant-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-wechat-dark .article-manager-panel .hover\:bg-gray-50:hover {
+  background: #283040 !important;
+}
+.theme-dark .article-manager-panel .bg-blue-50,
+.theme-bear-dark .article-manager-panel .bg-blue-50,
+.theme-modern-dark .article-manager-panel .bg-blue-50,
+.theme-elegant-dark .article-manager-panel .bg-blue-50,
+.theme-wechat-dark .article-manager-panel .bg-blue-50 {
+  background: #22304a !important;
+}
+.theme-dark .article-manager-panel .border-blue-200,
+.theme-bear-dark .article-manager-panel .border-blue-200,
+.theme-modern-dark .article-manager-panel .border-blue-200,
+.theme-elegant-dark .article-manager-panel .border-blue-200,
+.theme-wechat-dark .article-manager-panel .border-blue-200 {
+  border-color: #60a5fa !important;
+}
+.theme-dark .article-manager-panel .bg-blue-100,
+.theme-bear-dark .article-manager-panel .bg-blue-100,
+.theme-modern-dark .article-manager-panel .bg-blue-100,
+.theme-elegant-dark .article-manager-panel .bg-blue-100,
+.theme-wechat-dark .article-manager-panel .bg-blue-100 {
+  background: #243c5a !important;
+  color: #60a5fa !important;
+}
+.theme-dark .article-manager-panel .text-blue-600,
+.theme-bear-dark .article-manager-panel .text-blue-600,
+.theme-modern-dark .article-manager-panel .text-blue-600,
+.theme-elegant-dark .article-manager-panel .text-blue-600,
+.theme-wechat-dark .article-manager-panel .text-blue-600 {
+  color: #60a5fa !important;
+}
+.theme-dark .article-manager-panel .bg-gray-50,
+.theme-bear-dark .article-manager-panel .bg-gray-50,
+.theme-modern-dark .article-manager-panel .bg-gray-50,
+.theme-elegant-dark .article-manager-panel .bg-gray-50,
+.theme-wechat-dark .article-manager-panel .bg-gray-50 {
+  background: #232a36 !important;
+}
+.theme-dark .article-manager-panel .rounded,
+.theme-bear-dark .article-manager-panel .rounded,
+.theme-modern-dark .article-manager-panel .rounded,
+.theme-elegant-dark .article-manager-panel .rounded,
+.theme-wechat-dark .article-manager-panel .rounded {
+  border-radius: 0.5rem;
+}
+.theme-dark .article-manager-panel .text-green-600,
+.theme-bear-dark .article-manager-panel .text-green-600,
+.theme-modern-dark .article-manager-panel .text-green-600,
+.theme-elegant-dark .article-manager-panel .text-green-600,
+.theme-wechat-dark .article-manager-panel .text-green-600 {
+  color: #34d399 !important;
+}
+.theme-dark .article-manager-panel .hover\:text-blue-700:hover,
+.theme-bear-dark .article-manager-panel .hover\:text-blue-700:hover,
+.theme-modern-dark .article-manager-panel .hover\:text-blue-700:hover,
+.theme-elegant-dark .article-manager-panel .hover\:text-blue-700:hover,
+.theme-wechat-dark .article-manager-panel .hover\:text-blue-700:hover {
+  color: #93c5fd !important;
+}
+.theme-dark .article-manager-panel .hover\:text-red-600:hover,
+.theme-bear-dark .article-manager-panel .hover\:text-red-600:hover,
+.theme-modern-dark .article-manager-panel .hover\:text-red-600:hover,
+.theme-elegant-dark .article-manager-panel .hover\:text-red-600:hover,
+.theme-wechat-dark .article-manager-panel .hover\:text-red-600:hover {
+  color: #f87171 !important;
+}
+.theme-dark .article-manager-panel .rounded-full,
+.theme-bear-dark .article-manager-panel .rounded-full,
+.theme-modern-dark .article-manager-panel .rounded-full,
+.theme-elegant-dark .article-manager-panel .rounded-full,
+.theme-wechat-dark .article-manager-panel .rounded-full {
+  border-radius: 9999px;
+}
+
+/* 文章管理器搜索框夜间模式适配 */
+.theme-dark .article-manager-panel input[type="text"],
+.theme-bear-dark .article-manager-panel input[type="text"],
+.theme-modern-dark .article-manager-panel input[type="text"],
+.theme-elegant-dark .article-manager-panel input[type="text"],
+.theme-wechat-dark .article-manager-panel input[type="text"] {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border: 1px solid rgba(74, 85, 104, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .article-manager-panel input[type="text"]::placeholder,
+.theme-bear-dark .article-manager-panel input[type="text"]::placeholder,
+.theme-modern-dark .article-manager-panel input[type="text"]::placeholder,
+.theme-elegant-dark .article-manager-panel input[type="text"]::placeholder,
+.theme-wechat-dark .article-manager-panel input[type="text"]::placeholder {
+  color: #a0aec0 !important;
+}
+
+.theme-dark .article-manager-panel input[type="text"]:focus,
+.theme-bear-dark .article-manager-panel input[type="text"]:focus,
+.theme-modern-dark .article-manager-panel input[type="text"]:focus,
+.theme-elegant-dark .article-manager-panel input[type="text"]:focus,
+.theme-wechat-dark .article-manager-panel input[type="text"]:focus {
+  border-color: #63b3ed !important;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1) !important;
+  background: rgba(45, 55, 72, 1) !important;
+}
+
+/* 文章管理器搜索图标夜间模式适配 */
+.theme-dark .article-manager-panel .text-gray-400,
+.theme-bear-dark .article-manager-panel .text-gray-400,
+.theme-modern-dark .article-manager-panel .text-gray-400,
+.theme-elegant-dark .article-manager-panel .text-gray-400,
+.theme-wechat-dark .article-manager-panel .text-gray-400 {
+  color: #a0aec0 !important;
+}
+
+/* 文章管理器按钮夜间模式适配 */
+.theme-dark .article-manager-panel .btn-primary,
+.theme-bear-dark .article-manager-panel .btn-primary,
+.theme-modern-dark .article-manager-panel .btn-primary,
+.theme-elegant-dark .article-manager-panel .btn-primary,
+.theme-wechat-dark .article-manager-panel .btn-primary {
+  background: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(99, 179, 237, 0.3) !important;
+}
+
+.theme-dark .article-manager-panel .btn-primary:hover,
+.theme-bear-dark .article-manager-panel .btn-primary:hover,
+.theme-modern-dark .article-manager-panel .btn-primary:hover,
+.theme-elegant-dark .article-manager-panel .btn-primary:hover,
+.theme-wechat-dark .article-manager-panel .btn-primary:hover {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(99, 179, 237, 0.4) !important;
+}
+
+.theme-dark .article-manager-panel .btn-secondary,
+.theme-bear-dark .article-manager-panel .btn-secondary,
+.theme-modern-dark .article-manager-panel .btn-secondary,
+.theme-elegant-dark .article-manager-panel .btn-secondary,
+.theme-wechat-dark .article-manager-panel .btn-secondary {
+  background: rgba(45, 55, 72, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(74, 85, 104, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.theme-dark .article-manager-panel .btn-secondary:hover,
+.theme-bear-dark .article-manager-panel .btn-secondary:hover,
+.theme-modern-dark .article-manager-panel .btn-secondary:hover,
+.theme-elegant-dark .article-manager-panel .btn-secondary:hover,
+.theme-wechat-dark .article-manager-panel .btn-secondary:hover {
+  background: rgba(45, 55, 72, 1) !important;
+  color: #f7fafc !important;
+  border-color: rgba(148, 163, 184, 0.5) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 文章管理器标签按钮夜间模式适配 */
+.theme-dark .article-manager-panel .bg-gray-100.text-gray-600,
+.theme-bear-dark .article-manager-panel .bg-gray-100.text-gray-600,
+.theme-modern-dark .article-manager-panel .bg-gray-100.text-gray-600,
+.theme-elegant-dark .article-manager-panel .bg-gray-100.text-gray-600,
+.theme-wechat-dark .article-manager-panel .bg-gray-100.text-gray-600 {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #a0aec0 !important;
+}
+
+.theme-dark .article-manager-panel .bg-gray-100.text-gray-600:hover,
+.theme-bear-dark .article-manager-panel .bg-gray-100.text-gray-600:hover,
+.theme-modern-dark .article-manager-panel .bg-gray-100.text-gray-600:hover,
+.theme-elegant-dark .article-manager-panel .bg-gray-100.text-gray-600:hover,
+.theme-wechat-dark .article-manager-panel .bg-gray-100.text-gray-600:hover {
+  background: rgba(45, 55, 72, 1) !important;
+  color: #e2e8f0 !important;
+}
+
+/* 文章管理器选中状态夜间模式适配 */
+.theme-dark .article-manager-panel .bg-blue-100.text-blue-600,
+.theme-bear-dark .article-manager-panel .bg-blue-100.text-blue-600,
+.theme-modern-dark .article-manager-panel .bg-blue-100.text-blue-600,
+.theme-elegant-dark .article-manager-panel .bg-blue-100.text-blue-600,
+.theme-wechat-dark .article-manager-panel .bg-blue-100.text-blue-600 {
+  background: rgba(99, 179, 237, 0.2) !important;
+  color: #63b3ed !important;
+}
+
+/* 文章管理器文章项夜间模式适配 */
+.theme-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-bear-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-modern-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-elegant-dark .article-manager-panel .hover\:bg-gray-50:hover,
+.theme-wechat-dark .article-manager-panel .hover\:bg-gray-50:hover {
+  background: rgba(45, 55, 72, 0.6) !important;
+}
+
+/* 文章管理器标签夜间模式适配 */
+.theme-dark .article-manager-panel .bg-gray-100.text-gray-600.rounded,
+.theme-bear-dark .article-manager-panel .bg-gray-100.text-gray-600.rounded,
+.theme-modern-dark .article-manager-panel .bg-gray-100.text-gray-600.rounded,
+.theme-elegant-dark .article-manager-panel .bg-gray-100.text-gray-600.rounded,
+.theme-wechat-dark .article-manager-panel .bg-gray-100.text-gray-600.rounded {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #a0aec0 !important;
+}
+
+/* 文章管理器加载状态夜间模式适配 */
+.theme-dark .article-manager-panel .text-gray-500,
+.theme-bear-dark .article-manager-panel .text-gray-500,
+.theme-modern-dark .article-manager-panel .text-gray-500,
+.theme-elegant-dark .article-manager-panel .text-gray-500,
+.theme-wechat-dark .article-manager-panel .text-gray-500 {
+  color: #a0aec0 !important;
+}
+
+/* 文章管理器标题夜间模式适配 */
+.theme-dark .article-manager-panel h2.text-lg.font-semibold.text-gray-800,
+.theme-bear-dark .article-manager-panel h2.text-lg.font-semibold.text-gray-800,
+.theme-modern-dark .article-manager-panel h2.text-lg.font-semibold.text-gray-800,
+.theme-elegant-dark .article-manager-panel h2.text-lg.font-semibold.text-gray-800,
+.theme-wechat-dark .article-manager-panel h2.text-lg.font-semibold.text-gray-800 {
+  color: #f7fafc !important;
+}
+
+/* 文章管理器文章标题夜间模式适配 */
+.theme-dark .article-manager-panel h3.font-medium.text-gray-900,
+.theme-bear-dark .article-manager-panel h3.font-medium.text-gray-900,
+.theme-modern-dark .article-manager-panel h3.font-medium.text-gray-900,
+.theme-elegant-dark .article-manager-panel h3.font-medium.text-gray-900,
+.theme-wechat-dark .article-manager-panel h3.font-medium.text-gray-900 {
+  color: #e2e8f0 !important;
+}
+
+/* 文章管理器操作按钮夜间模式适配 */
+.theme-dark .article-manager-panel .text-gray-400.hover\:text-gray-600,
+.theme-bear-dark .article-manager-panel .text-gray-400.hover\:text-gray-600,
+.theme-modern-dark .article-manager-panel .text-gray-400.hover\:text-gray-600,
+.theme-elegant-dark .article-manager-panel .text-gray-400.hover\:text-gray-600,
+.theme-wechat-dark .article-manager-panel .text-gray-400.hover\:text-gray-600 {
+  color: #a0aec0 !important;
+}
+
+.theme-dark .article-manager-panel .text-gray-400.hover\:text-gray-600:hover,
+.theme-bear-dark .article-manager-panel .text-gray-400.hover\:text-gray-600:hover,
+.theme-modern-dark .article-manager-panel .text-gray-400.hover\:text-gray-600:hover,
+.theme-elegant-dark .article-manager-panel .text-gray-400.hover\:text-gray-600:hover,
+.theme-wechat-dark .article-manager-panel .text-gray-400.hover\:text-gray-600:hover {
+  color: #e2e8f0 !important;
+}
+
+/* 文章管理器删除按钮夜间模式适配 */
+.theme-dark .article-manager-panel .text-gray-400.hover\:text-red-600,
+.theme-bear-dark .article-manager-panel .text-gray-400.hover\:text-red-600,
+.theme-modern-dark .article-manager-panel .text-gray-400.hover\:text-red-600,
+.theme-elegant-dark .article-manager-panel .text-gray-400.hover\:text-red-600,
+.theme-wechat-dark .article-manager-panel .text-gray-400.hover\:text-red-600 {
+  color: #a0aec0 !important;
+}
+
+.theme-dark .article-manager-panel .text-gray-400.hover\:text-red-600:hover,
+.theme-bear-dark .article-manager-panel .text-gray-400.hover\:text-red-600:hover,
+.theme-modern-dark .article-manager-panel .text-gray-400.hover\:text-red-600:hover,
+.theme-elegant-dark .article-manager-panel .text-gray-400.hover\:text-red-600:hover,
+.theme-wechat-dark .article-manager-panel .text-gray-400.hover\:text-red-600:hover {
+  color: #f87171 !important;
+}
+
+/* 文章管理器创建文章按钮夜间模式适配 */
+.theme-dark .article-manager-panel .text-blue-600.hover\:text-blue-700,
+.theme-bear-dark .article-manager-panel .text-blue-600.hover\:text-blue-700,
+.theme-modern-dark .article-manager-panel .text-blue-600.hover\:text-blue-700,
+.theme-elegant-dark .article-manager-panel .text-blue-600.hover\:text-blue-700,
+.theme-wechat-dark .article-manager-panel .text-blue-600.hover\:text-blue-700 {
+  color: #63b3ed !important;
+}
+
+.theme-dark .article-manager-panel .text-blue-600.hover\:text-blue-700:hover,
+.theme-bear-dark .article-manager-panel .text-blue-600.hover\:text-blue-700:hover,
+.theme-modern-dark .article-manager-panel .text-blue-600.hover\:text-blue-700:hover,
+.theme-elegant-dark .article-manager-panel .text-blue-600.hover\:text-blue-700:hover,
+.theme-wechat-dark .article-manager-panel .text-blue-600.hover\:text-blue-700:hover {
+  color: #93c5fd !important;
+}
+
+/* 文章管理器标签数量夜间模式适配 */
+.theme-dark .article-manager-panel .text-gray-400,
+.theme-bear-dark .article-manager-panel .text-gray-400,
+.theme-modern-dark .article-manager-panel .text-gray-400,
+.theme-elegant-dark .article-manager-panel .text-gray-400,
+.theme-wechat-dark .article-manager-panel .text-gray-400 {
+  color: #a0aec0 !important;
+}
+
+/* 文章管理器标签按钮hover状态夜间模式适配 */
+.theme-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200,
+.theme-bear-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200,
+.theme-modern-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200,
+.theme-elegant-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200,
+.theme-wechat-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200 {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #a0aec0 !important;
+}
+
+.theme-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200:hover,
+.theme-bear-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200:hover,
+.theme-modern-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200:hover,
+.theme-elegant-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200:hover,
+.theme-wechat-dark .article-manager-panel .bg-gray-100.text-gray-600.hover\:bg-gray-200:hover {
+  background: rgba(45, 55, 72, 1) !important;
+  color: #e2e8f0 !important;
+}
+
+/* 文章管理器搜索框focus状态夜间模式适配 */
+.theme-dark .article-manager-panel input[type="text"].focus\:ring-blue-500:focus,
+.theme-bear-dark .article-manager-panel input[type="text"].focus\:ring-blue-500:focus,
+.theme-modern-dark .article-manager-panel input[type="text"].focus\:ring-blue-500:focus,
+.theme-elegant-dark .article-manager-panel input[type="text"].focus\:ring-blue-500:focus,
+.theme-wechat-dark .article-manager-panel input[type="text"].focus\:ring-blue-500:focus {
+  border-color: #63b3ed !important;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1) !important;
+  background: rgba(45, 55, 72, 1) !important;
+}
+
+/* 顶部功能区按钮夜间模式适配 */
+/* 主要按钮 - 保存、导出HTML、复制内容 */
+.theme-dark .btn-primary,
+.theme-bear-dark .btn-primary,
+.theme-modern-dark .btn-primary,
+.theme-elegant-dark .btn-primary,
+.theme-wechat-dark .btn-primary {
+  background: linear-gradient(135deg, #63b3ed 0%, #4299e1 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(99, 179, 237, 0.3) !important;
+}
+
+.theme-dark .btn-primary:hover:not(:disabled),
+.theme-bear-dark .btn-primary:hover:not(:disabled),
+.theme-modern-dark .btn-primary:hover:not(:disabled),
+.theme-elegant-dark .btn-primary:hover:not(:disabled),
+.theme-wechat-dark .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(99, 179, 237, 0.4) !important;
+}
+
+.theme-dark .btn-primary:disabled,
+.theme-bear-dark .btn-primary:disabled,
+.theme-modern-dark .btn-primary:disabled,
+.theme-elegant-dark .btn-primary:disabled,
+.theme-wechat-dark .btn-primary:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* 成功按钮 - 导出HTML */
+.theme-dark .btn-success,
+.theme-bear-dark .btn-success,
+.theme-modern-dark .btn-success,
+.theme-elegant-dark .btn-success,
+.theme-wechat-dark .btn-success {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3) !important;
+}
+
+.theme-dark .btn-success:hover,
+.theme-bear-dark .btn-success:hover,
+.theme-modern-dark .btn-success:hover,
+.theme-elegant-dark .btn-success:hover,
+.theme-wechat-dark .btn-success:hover {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(52, 211, 153, 0.4) !important;
+}
+
+/* 紫色按钮 - 复制内容 */
+.theme-dark .btn-purple,
+.theme-bear-dark .btn-purple,
+.theme-modern-dark .btn-purple,
+.theme-elegant-dark .btn-purple,
+.theme-wechat-dark .btn-purple {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3) !important;
+}
+
+.theme-dark .btn-purple:hover,
+.theme-bear-dark .btn-purple:hover,
+.theme-modern-dark .btn-purple:hover,
+.theme-elegant-dark .btn-purple:hover,
+.theme-wechat-dark .btn-purple:hover {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4) !important;
+}
+
+.theme-dark .btn-purple:disabled,
+.theme-bear-dark .btn-purple:disabled,
+.theme-modern-dark .btn-purple:disabled,
+.theme-elegant-dark .btn-purple:disabled,
+.theme-wechat-dark .btn-purple:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* 次要按钮 - 显示预览、文章详情、显示管理、设置 */
+.theme-dark .btn-secondary,
+.theme-bear-dark .btn-secondary,
+.theme-modern-dark .btn-secondary,
+.theme-elegant-dark .btn-secondary,
+.theme-wechat-dark .btn-secondary {
+  background: rgba(45, 55, 72, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(74, 85, 104, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.theme-dark .btn-secondary:hover,
+.theme-bear-dark .btn-secondary:hover,
+.theme-modern-dark .btn-secondary:hover,
+.theme-elegant-dark .btn-secondary:hover,
+.theme-wechat-dark .btn-secondary:hover {
+  background: rgba(45, 55, 72, 1) !important;
+  color: #f7fafc !important;
+  border-color: rgba(148, 163, 184, 0.5) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 文章详情侧边栏夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200,
+.theme-bear-dark .bg-white.border-r.border-gray-200,
+.theme-modern-dark .bg-white.border-r.border-gray-200,
+.theme-elegant-dark .bg-white.border-r.border-gray-200,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 {
+  background: rgba(26, 32, 44, 0.95) !important;
+  border-right-color: rgba(74, 85, 104, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+/* 文章详情侧边栏标题夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 .text-lg.font-semibold.text-gray-800,
+.theme-bear-dark .bg-white.border-r.border-gray-200 .text-lg.font-semibold.text-gray-800,
+.theme-modern-dark .bg-white.border-r.border-gray-200 .text-lg.font-semibold.text-gray-800,
+.theme-elegant-dark .bg-white.border-r.border-gray-200 .text-lg.font-semibold.text-gray-800,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 .text-lg.font-semibold.text-gray-800 {
+  color: #f7fafc !important;
+}
+
+/* 文章详情侧边栏标签夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 .text-sm.font-medium.text-gray-700,
+.theme-bear-dark .bg-white.border-r.border-gray-200 .text-sm.font-medium.text-gray-700,
+.theme-modern-dark .bg-white.border-r.border-gray-200 .text-sm.font-medium.text-gray-700,
+.theme-elegant-dark .bg-white.border-r.border-gray-200 .text-sm.font-medium.text-gray-700,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 .text-sm.font-medium.text-gray-700 {
+  color: #a0aec0 !important;
+}
+
+/* 文章详情侧边栏输入框夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 input[type="text"],
+.theme-bear-dark .bg-white.border-r.border-gray-200 input[type="text"],
+.theme-modern-dark .bg-white.border-r.border-gray-200 input[type="text"],
+.theme-elegant-dark .bg-white.border-r.border-gray-200 input[type="text"],
+.theme-wechat-dark .bg-white.border-r.border-gray-200 input[type="text"] {
+  background: rgba(45, 55, 72, 0.8) !important;
+  border-color: rgba(74, 85, 104, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+/* 文章详情侧边栏文字夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 .text-sm.text-gray-700,
+.theme-bear-dark .bg-white.border-r.border-gray-200 .text-sm.text-gray-700,
+.theme-modern-dark .bg-white.border-r.border-gray-200 .text-sm.text-gray-700,
+.theme-elegant-dark .bg-white.border-r.border-gray-200 .text-sm.text-gray-700,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 .text-sm.text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
+/* 文章详情侧边栏分割线夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 .border-t.border-gray-200,
+.theme-bear-dark .bg-white.border-r.border-gray-200 .border-t.border-gray-200,
+.theme-modern-dark .bg-white.border-r.border-gray-200 .border-t.border-gray-200,
+.theme-elegant-dark .bg-white.border-r.border-gray-200 .border-t.border-gray-200,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 .border-t.border-gray-200 {
+  border-top-color: rgba(74, 85, 104, 0.3) !important;
+}
+
+/* 文章详情侧边栏小字夜间模式适配 */
+.theme-dark .bg-white.border-r.border-gray-200 .text-xs.text-gray-500,
+.theme-bear-dark .bg-white.border-r.border-gray-200 .text-xs.text-gray-500,
+.theme-modern-dark .bg-white.border-r.border-gray-200 .text-xs.text-gray-500,
+.theme-elegant-dark .bg-white.border-r.border-gray-200 .text-xs.text-gray-500,
+.theme-wechat-dark .bg-white.border-r.border-gray-200 .text-xs.text-gray-500 {
+  color: #a0aec0 !important;
+}
+
+/* 预览区域夜间模式适配 */
+.theme-dark .preview-container .text-lg.font-semibold.text-gray-800,
+.theme-bear-dark .preview-container .text-lg.font-semibold.text-gray-800,
+.theme-modern-dark .preview-container .text-lg.font-semibold.text-gray-800,
+.theme-elegant-dark .preview-container .text-lg.font-semibold.text-gray-800,
+.theme-wechat-dark .preview-container .text-lg.font-semibold.text-gray-800 {
+  color: #f7fafc !important;
+}
+
+/* 预览内容文字夜间模式适配 */
+/* 预览内容基础文字 */
+.theme-dark .preview-content,
+.theme-bear-dark .preview-content,
+.theme-modern-dark .preview-content,
+.theme-elegant-dark .preview-content,
+.theme-wechat-dark .preview-content {
+  color: #e2e8f0 !important;
+}
+
+/* 预览内容标题 */
+.theme-dark .preview-content h1,
+.theme-bear-dark .preview-content h1,
+.theme-modern-dark .preview-content h1,
+.theme-elegant-dark .preview-content h1,
+.theme-wechat-dark .preview-content h1 {
+  color: #f7fafc !important;
+}
+
+.theme-dark .preview-content h2,
+.theme-bear-dark .preview-content h2,
+.theme-modern-dark .preview-content h2,
+.theme-elegant-dark .preview-content h2,
+.theme-wechat-dark .preview-content h2 {
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .preview-content h3,
+.theme-bear-dark .preview-content h3,
+.theme-modern-dark .preview-content h3,
+.theme-elegant-dark .preview-content h3,
+.theme-wechat-dark .preview-content h3 {
+  color: #cbd5e1 !important;
+}
+
+.theme-dark .preview-content h4,
+.theme-bear-dark .preview-content h4,
+.theme-modern-dark .preview-content h4,
+.theme-elegant-dark .preview-content h4,
+.theme-wechat-dark .preview-content h4 {
+  color: #a0aec0 !important;
+}
+
+/* 预览内容段落和列表 */
+.theme-dark .preview-content p,
+.theme-bear-dark .preview-content p,
+.theme-modern-dark .preview-content p,
+.theme-elegant-dark .preview-content p,
+.theme-wechat-dark .preview-content p {
+  color: #cbd5e1 !important;
+}
+
+.theme-dark .preview-content li,
+.theme-bear-dark .preview-content li,
+.theme-modern-dark .preview-content li,
+.theme-elegant-dark .preview-content li,
+.theme-wechat-dark .preview-content li {
+  color: #cbd5e1 !important;
+}
+
+/* 预览内容强调文字 */
+.theme-dark .preview-content strong,
+.theme-bear-dark .preview-content strong,
+.theme-modern-dark .preview-content strong,
+.theme-elegant-dark .preview-content strong,
+.theme-wechat-dark .preview-content strong {
+  color: #f7fafc !important;
+}
+
+.theme-dark .preview-content em,
+.theme-bear-dark .preview-content em,
+.theme-modern-dark .preview-content em,
+.theme-elegant-dark .preview-content em,
+.theme-wechat-dark .preview-content em {
+  color: #a0aec0 !important;
+}
+
+/* 预览内容列表项强调文字 */
+.theme-dark .preview-content li strong,
+.theme-bear-dark .preview-content li strong,
+.theme-modern-dark .preview-content li strong,
+.theme-elegant-dark .preview-content li strong,
+.theme-wechat-dark .preview-content li strong {
+  color: #f7fafc !important;
+}
+
+.theme-dark .preview-content li em,
+.theme-bear-dark .preview-content li em,
+.theme-modern-dark .preview-content li em,
+.theme-elegant-dark .preview-content li em,
+.theme-wechat-dark .preview-content li em {
+  color: #a0aec0 !important;
+}
+
+/* 预览内容代码 */
+.theme-dark .preview-content code,
+.theme-bear-dark .preview-content code,
+.theme-modern-dark .preview-content code,
+.theme-elegant-dark .preview-content code,
+.theme-wechat-dark .preview-content code {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #f87171 !important;
+}
+
+.theme-dark .preview-content li code,
+.theme-bear-dark .preview-content li code,
+.theme-modern-dark .preview-content li code,
+.theme-elegant-dark .preview-content li code,
+.theme-wechat-dark .preview-content li code {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #f87171 !important;
+}
+
+/* 预览内容代码块 */
+.theme-dark .preview-content pre,
+.theme-bear-dark .preview-content pre,
+.theme-modern-dark .preview-content pre,
+.theme-elegant-dark .preview-content pre,
+.theme-wechat-dark .preview-content pre {
+  background: #1a202c !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .preview-content pre code,
+.theme-bear-dark .preview-content pre code,
+.theme-modern-dark .preview-content pre code,
+.theme-elegant-dark .preview-content pre code,
+.theme-wechat-dark .preview-content pre code {
+  background: none !important;
+  color: inherit !important;
+}
+
+/* 预览内容链接 */
+.theme-dark .preview-content a,
+.theme-bear-dark .preview-content a,
+.theme-modern-dark .preview-content a,
+.theme-elegant-dark .preview-content a,
+.theme-wechat-dark .preview-content a {
+  color: #63b3ed !important;
+}
+
+.theme-dark .preview-content a:hover,
+.theme-bear-dark .preview-content a:hover,
+.theme-modern-dark .preview-content a:hover,
+.theme-elegant-dark .preview-content a:hover,
+.theme-wechat-dark .preview-content a:hover {
+  color: #93c5fd !important;
+  border-bottom-color: #93c5fd !important;
+}
+
+.theme-dark .preview-content li a,
+.theme-bear-dark .preview-content li a,
+.theme-modern-dark .preview-content li a,
+.theme-elegant-dark .preview-content li a,
+.theme-wechat-dark .preview-content li a {
+  color: #63b3ed !important;
+}
+
+.theme-dark .preview-content li a:hover,
+.theme-bear-dark .preview-content li a:hover,
+.theme-modern-dark .preview-content li a:hover,
+.theme-elegant-dark .preview-content li a:hover,
+.theme-wechat-dark .preview-content li a:hover {
+  color: #93c5fd !important;
+  border-bottom-color: #93c5fd !important;
+}
+
+/* 预览内容引用块 */
+.theme-dark .preview-content blockquote,
+.theme-bear-dark .preview-content blockquote,
+.theme-modern-dark .preview-content blockquote,
+.theme-elegant-dark .preview-content blockquote,
+.theme-wechat-dark .preview-content blockquote {
+  background: rgba(99, 179, 237, 0.1) !important;
+  border-left-color: #63b3ed !important;
+  color: #a0aec0 !important;
+}
+
+/* 预览内容分割线 */
+.theme-dark .preview-content hr,
+.theme-bear-dark .preview-content hr,
+.theme-modern-dark .preview-content hr,
+.theme-elegant-dark .preview-content hr,
+.theme-wechat-dark .preview-content hr {
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent) !important;
+}
+
+/* 预览内容表格 */
+.theme-dark .preview-content table,
+.theme-bear-dark .preview-content table,
+.theme-modern-dark .preview-content table,
+.theme-elegant-dark .preview-content table,
+.theme-wechat-dark .preview-content table {
+  background: rgba(45, 55, 72, 0.8) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.theme-dark .preview-content th,
+.theme-bear-dark .preview-content th,
+.theme-modern-dark .preview-content th,
+.theme-elegant-dark .preview-content th,
+.theme-wechat-dark .preview-content th {
+  background: rgba(45, 55, 72, 0.9) !important;
+  color: #cbd5e1 !important;
+}
+
+.theme-dark .preview-content td,
+.theme-bear-dark .preview-content td,
+.theme-modern-dark .preview-content td,
+.theme-elegant-dark .preview-content td,
+.theme-wechat-dark .preview-content td {
+  border-bottom-color: rgba(74, 85, 104, 0.3) !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .preview-content tr:hover,
+.theme-bear-dark .preview-content tr:hover,
+.theme-modern-dark .preview-content tr:hover,
+.theme-elegant-dark .preview-content tr:hover,
+.theme-wechat-dark .preview-content tr:hover {
+  background: rgba(45, 55, 72, 0.6) !important;
+}
+
+/* 夜间模式 - 设置面板关闭按钮 */
+.theme-dark .settings-panel button.hover\:bg-gray-100,
+.theme-bear-dark .settings-panel button.hover\:bg-gray-100,
+.theme-modern-dark .settings-panel button.hover\:bg-gray-100,
+.theme-elegant-dark .settings-panel button.hover\:bg-gray-100,
+.theme-wechat-dark .settings-panel button.hover\:bg-gray-100 {
+  color: #a0aec0 !important;
+}
+
+.theme-dark .settings-panel button.hover\:bg-gray-100:hover,
+.theme-bear-dark .settings-panel button.hover\:bg-gray-100:hover,
+.theme-modern-dark .settings-panel button.hover\:bg-gray-100:hover,
+.theme-elegant-dark .settings-panel button.hover\:bg-gray-100:hover,
+.theme-wechat-dark .settings-panel button.hover\:bg-gray-100:hover {
+  background: rgba(45, 55, 72, 0.8) !important;
+  color: #e2e8f0 !important;
+}
