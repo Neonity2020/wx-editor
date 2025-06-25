@@ -423,7 +423,7 @@ body {
 
 /* 编辑器内容元素样式 */
 .editor-content h1 {
-  font-size: 2.5em;
+  /* font-size: 2.5em; */
   font-weight: 700;
   color: #1e293b;
   margin: 0 0 32px 0;
@@ -794,7 +794,7 @@ body {
   }
   
   .editor-content h1 {
-    font-size: 2em;
+    /* font-size: 2em; */
     margin-bottom: 24px;
   }
   
@@ -838,7 +838,7 @@ body {
   }
   
   .editor-content h1 {
-    font-size: 1.8em;
+    /* font-size: 1.8em; */
     margin-bottom: 20px;
   }
   
@@ -2934,163 +2934,241 @@ body {
   color: #e2e8f0 !important;
 }
 
-/* Zen Mode 专注模式样式 */
-.zen-mode .zen-main {
-  justify-content: center;
-  align-items: center;
-  background: #fff !important;
-}
-.zen-mode .zen-editor {
-  max-width: 900px;
-  margin: 0 auto;
-  box-shadow: none !important;
-  background: none !important;
-  border: none !important;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.zen-mode .editor-container {
-  box-shadow: none !important;
-  border: none !important;
-  background: none !important;
-  border-radius: 0 !important;
-  min-height: 80vh;
-  margin: 0 auto;
-  padding: 0;
-}
-.zen-mode .editor-toolbar {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-.zen-mode .editor-banner {
-  display: none !important;
-}
-.zen-mode .upload-indicator,
-.zen-mode .loading-indicator {
-  top: 10%;
+/* Zen Mode 样式优化 */
+.zen-mode {
+  background-color: #f8fafc;
 }
 
-/* 夜间主题下Zen Mode适配 */
+/* Zen Mode 顶部提示条 */
+.zenmode-topbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  padding: 12px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Zen Mode 主内容区域 */
+.zen-mode .zen-main {
+  background: #f8fafc;
+  height: calc(100vh - 56px); /* 减去顶部提示条高度 */
+}
+
+/* Zen Mode 编辑器容器 */
+.zen-mode .zen-editor {
+  max-width: 900px; /* 限制最大宽度，提供更好的阅读体验 */
+  margin: 0 auto; /* 居中显示 */
+  width: 100%;
+  padding: 0 24px; /* 左右留白 */
+  background: transparent;
+}
+
+/* Zen Mode 编辑器容器样式 */
+.zen-mode .editor-container {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 213, 225, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  height: 100%;
+  max-height: none;
+}
+
+/* Zen Mode 编辑器工具栏 */
+.zen-mode .editor-toolbar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 16px 16px 0 0;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Zen Mode 编辑器Banner */
+.zen-mode .editor-banner {
+  display: none; /* 隐藏Banner，专注写作 */
+}
+
+/* Zen Mode 编辑器内容区域 */
+.zen-mode .editor-content {
+  padding: 32px 40px !important;
+  background: transparent !important;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1e293b;
+  border-radius: 0 0 16px 16px;
+  min-height: calc(100vh - 200px); /* 确保有足够的高度 */
+}
+
+/* Zen Mode 夜间模式适配 */
 .theme-dark.zen-mode,
 .theme-bear-dark.zen-mode,
 .theme-modern-dark.zen-mode,
 .theme-elegant-dark.zen-mode,
 .theme-wechat-dark.zen-mode {
-  background: #1a202c !important;
-}
-.zen-mode .editor-content {
-  background: none !important;
-  box-shadow: none !important;
-  border: none !important;
+  background-color: #1a202c !important;
 }
 
-/* Zen Mode 顶部提示条样式 */
-.zenmode-topbar {
-  width: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
-}
+/* Zen Mode 夜间模式 - 顶部提示条 */
 .theme-dark .zenmode-topbar,
 .theme-bear-dark .zenmode-topbar,
 .theme-modern-dark .zenmode-topbar,
 .theme-elegant-dark .zenmode-topbar,
 .theme-wechat-dark .zenmode-topbar {
-  background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
-  color: #f7fafc !important;
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+  color: #e2e8f0;
 }
 
-/* Zen Mode 夜间模式优化 */
-.theme-dark.zen-mode,
-.theme-bear-dark.zen-mode,
-.theme-modern-dark.zen-mode,
-.theme-elegant-dark.zen-mode,
-.theme-wechat-dark.zen-mode {
-  background: #181e29 !important;
-}
+/* Zen Mode 夜间模式 - 主内容区域 */
 .theme-dark.zen-mode .zen-main,
 .theme-bear-dark.zen-mode .zen-main,
 .theme-modern-dark.zen-mode .zen-main,
 .theme-elegant-dark.zen-mode .zen-main,
 .theme-wechat-dark.zen-mode .zen-main {
-  background: #181e29 !important;
+  background: #1a202c !important;
 }
-.theme-dark.zen-mode .zen-editor,
-.theme-bear-dark.zen-mode .zen-editor,
-.theme-modern-dark.zen-mode .zen-editor,
-.theme-elegant-dark.zen-mode .zen-editor,
-.theme-wechat-dark.zen-mode .zen-editor {
-  background: none !important;
-  box-shadow: none !important;
-  border: none !important;
-}
+
+/* Zen Mode 夜间模式 - 编辑器容器 */
 .theme-dark.zen-mode .editor-container,
 .theme-bear-dark.zen-mode .editor-container,
 .theme-modern-dark.zen-mode .editor-container,
 .theme-elegant-dark.zen-mode .editor-container,
 .theme-wechat-dark.zen-mode .editor-container {
-  background: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  min-height: 70vh;
-  margin: 0 auto;
-  padding: 0;
+  background: rgba(26, 32, 44, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(74, 85, 104, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.theme-dark.zen-mode .editor-content,
-.theme-bear-dark.zen-mode .editor-content,
-.theme-modern-dark.zen-mode .editor-content,
-.theme-elegant-dark.zen-mode .editor-content,
-.theme-wechat-dark.zen-mode .editor-content {
-  background: none !important;
-  color: #e2e8f0 !important;
-  box-shadow: none !important;
-  border: none !important;
-  padding: 16px 0 16px 0 !important;
-}
+
+/* Zen Mode 夜间模式 - 编辑器工具栏 */
 .theme-dark.zen-mode .editor-toolbar,
 .theme-bear-dark.zen-mode .editor-toolbar,
 .theme-modern-dark.zen-mode .editor-toolbar,
 .theme-elegant-dark.zen-mode .editor-toolbar,
 .theme-wechat-dark.zen-mode .editor-toolbar {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-.theme-dark .zenmode-topbar,
-.theme-bear-dark .zenmode-topbar,
-.theme-modern-dark .zenmode-topbar,
-.theme-elegant-dark .zenmode-topbar,
-.theme-wechat-dark .zenmode-topbar {
-  background: linear-gradient(90deg, #232a36 0%, #374151 100%) !important;
-  color: #f9fafc !important;
-  text-shadow: 0 1px 8px #232a36;
-  letter-spacing: 2px;
-  font-size: 16px;
+  background: rgba(26, 32, 44, 0.98) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+  border-radius: 16px 16px 0 0;
+  color: #e2e8f0;
 }
 
-.zen-mode .editor-content {
-  margin-top: 32px !important;
-}
+/* Zen Mode 夜间模式 - 编辑器内容区域 */
 .theme-dark.zen-mode .editor-content,
 .theme-bear-dark.zen-mode .editor-content,
 .theme-modern-dark.zen-mode .editor-content,
 .theme-elegant-dark.zen-mode .editor-content,
 .theme-wechat-dark.zen-mode .editor-content {
-  padding-top: 16px !important;
+  background: transparent !important;
+  color: #e2e8f0;
+  border-radius: 0 0 16px 16px;
+}
+
+/* Zen Mode 响应式优化 */
+@media (max-width: 1024px) {
+  .zen-mode .zen-editor {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  
+  .zen-mode .editor-content {
+    padding: 24px 28px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .zen-mode .zen-editor {
+    padding: 0 12px;
+  }
+  
+  .zen-mode .editor-container {
+    border-radius: 12px;
+  }
+  
+  .zen-mode .editor-toolbar {
+    border-radius: 12px 12px 0 0;
+    padding: 12px 16px;
+  }
+  
+  .zen-mode .editor-content {
+    padding: 20px 24px !important;
+    border-radius: 0 0 12px 12px;
+    font-size: 15px;
+  }
+  
+  .zenmode-topbar {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zen-mode .zen-editor {
+    padding: 0 8px;
+  }
+  
+  .zen-mode .editor-container {
+    border-radius: 8px;
+  }
+  
+  .zen-mode .editor-toolbar {
+    border-radius: 8px 8px 0 0;
+    padding: 8px 12px;
+  }
+  
+  .zen-mode .editor-content {
+    padding: 16px 20px !important;
+    border-radius: 0 0 8px 8px;
+    font-size: 14px;
+  }
+  
+  .zenmode-topbar {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .zenmode-topbar .btn-primary {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-width: 60px;
+  }
+}
+
+/* Zen Mode 标题上方间距优化 */
+.zen-mode .editor-content h1,
+.zen-mode .editor-content h2,
+.zen-mode .editor-content h3,
+.zen-mode .editor-content h4 {
+  margin-top: 16px !important;
+}
+
+/* 夜间模式下加粗文字高对比优化 */
+.theme-dark .editor-content strong,
+.theme-bear-dark .editor-content strong,
+.theme-modern-dark .editor-content strong,
+.theme-elegant-dark .editor-content strong,
+.theme-wechat-dark .editor-content strong,
+.theme-dark .preview-content strong,
+.theme-bear-dark .preview-content strong,
+.theme-modern-dark .preview-content strong,
+.theme-elegant-dark .preview-content strong,
+.theme-wechat-dark .preview-content strong {
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
