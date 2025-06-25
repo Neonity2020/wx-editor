@@ -470,6 +470,15 @@ function App() {
             {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
             {isSaving ? '保存中...' : '保存'}
           </button>
+          <button
+            onClick={() => setZenMode(false)}
+            className="btn-secondary"
+            title="退出专注模式"
+            style={{ minWidth: 80 }}
+          >
+            <X size={14} />
+            退出
+          </button>
         </div>
       )}
       {/* 顶部工具栏 - Bear 风格 */}
