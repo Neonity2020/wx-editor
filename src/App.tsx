@@ -656,7 +656,7 @@ function App() {
           </div>
         )}
         {/* 编辑器区域 */}
-        <div className={`flex-1 flex flex-col${zenMode ? ' zen-editor' : ''}${showPreview && !zenMode ? ' w-1/2' : ' w-full'}`}>
+        <div className={`flex-1 flex flex-col${zenMode ? ' zen-editor' : ''}`}>
           <Editor
             content={content}
             onChange={setContent}
@@ -671,9 +671,18 @@ function App() {
         </div>
         {/* 预览区域 */}
         {showPreview && !zenMode && (
-          <div className="preview-container w-1/2">
+          <div className="preview-container">
             <div className="p-6">
-              <h2 className="text-lg font-semibold mb-4 text-gray-800">预览效果</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-800">预览效果</h2>
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  title="关闭预览"
+                >
+                  <X size={16} className="text-gray-500" />
+                </button>
+              </div>
               <div 
                 className="preview-content"
                 dangerouslySetInnerHTML={{ __html: content }}

@@ -252,12 +252,21 @@ const HtmlExporter: React.FC<HtmlExporterProps> = ({
       
       <button
         onClick={handleCopyToClipboard}
-        className="btn-purple"
+        className="btn-copy-content"
         disabled={isCopying}
-        title="复制内容到剪贴板"
+        title="复制内容到剪贴板，可直接粘贴到微信公众号编辑器"
       >
-        {isCopying ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
-        {isCopying ? '复制中...' : '复制内容'}
+        {isCopying ? (
+          <>
+            <Loader2 size={14} className="animate-spin" />
+            <span>复制中...</span>
+          </>
+        ) : (
+          <>
+            <Upload size={14} />
+            <span>复制内容</span>
+          </>
+        )}
       </button>
     </div>
   );
